@@ -1,0 +1,61 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 35px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: transparent;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+.scroll-to-top.visible {
+  background-color: #1b1b1b1e;
+  stroke: #554f4f;
+  border: 2px solid gray;
+}
+
+.scroll-to-top:hover {
+  transform: scale(1.1);
+}
+
+.scroll-to-top svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: auto;
+  transform-origin: center;
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+  stroke: #0b050501;
+  fill: transparent;
+}
+
+.scroll-to-top svg path {
+  stroke-width: 4;
+  stroke: #ef0c0c;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+  stroke-dasharray: 53;
+  stroke-dashoffset: 53;
+}
+
+.scroll-to-top.visible svg path {
+  stroke: #d1cece;
+  stroke-dashoffset: 0;
+  animation: fill 2s ease forwards;
+}
+
+@keyframes fill {
+  0% {
+    stroke-dashoffset: 53;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
