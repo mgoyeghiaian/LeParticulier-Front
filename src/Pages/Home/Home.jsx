@@ -6,7 +6,6 @@ import Hero from "./Hero/Hero"
 import Social from "./SocialMedia/Social"
 import { useEffect } from "react"
 import { Element, scroller } from "react-scroll"
-
 const Home = () => {
   const location = useLocation();
 

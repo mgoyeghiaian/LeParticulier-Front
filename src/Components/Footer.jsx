@@ -45,11 +45,11 @@ const Footer = () => {
           <span className=" flex items-center text-[8px] md:hidden">
             SITE<span className="font-bold">MANAGER</span> V4.0 <Link to="http://www.in2info.com" target="_blank"> <img src={In2infoLogo} alt="In2infoLogo" className=" md:w-[100px] w-[60px]  p-2  rounded-sm" /></Link>
           </span>
-          <p className="mt-1 hidden md:block">
+          <div className="mt-1 hidden md:block">
             <div className=" flex items-center text-[13px]">
               SITE<span className="font-bold">MANAGER</span> V4.0 <Link to="http://www.in2info.com" target="_blank"> <img src={In2infoLogo} alt="In2infoLogo" className=" md:w-[100px]  p-2  rounded-sm" /></Link>
             </div>
-          </p>
+          </div>
         </span>
 
       </div>

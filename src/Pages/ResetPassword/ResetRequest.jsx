@@ -13,7 +13,7 @@ const ResetRequest = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://particulierlb.com/request-reset-password`, {
+      const response = await axios.post(`http://localhost:8081/request-reset-password`, {
         email,
       });
 
@@ -41,7 +41,7 @@ const ResetRequest = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
 
             <TextField
-              type='text'
+              type='email'
               label="Email"
               fullWidth
               variant="outlined"
