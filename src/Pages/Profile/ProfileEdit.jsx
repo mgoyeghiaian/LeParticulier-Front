@@ -1,143 +1,157 @@
-import { useState, useEffect } from 'react';
-import { Container, Typography, Paper, IconButton, TextField, Grid } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import CheckIcon from '@mui/icons-material/Check';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import EmailIcon from '@mui/icons-material/Email';
-// import VisibilityIcon from '@mui/icons-material/Visibility';
-// import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useState } from 'react';
+import { Container, TextField, Grid, Paper, Button } from '@mui/material';
+
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ProfileEdit = () => {
-  // const [isPasswordVisible, setIsPasswordVisib le] = useState(false);
-  // const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
-  // const togglePasswordVisibility = () => {
-  //   setIsPasswordVisible(!isPasswordVisible);
-  // };
+  const UserData = JSON.parse(localStorage.getItem('userData'))
+  const userId = UserData.id
 
-  // const toggleConfirmPasswordVisibility = () => {
-  //   setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
-  // };
+  const [firstname, setfirstname] = useState('');
+  const [lastname, setlastname] = useState(UserData.lastName);
+  const [email, setemail] = useState(UserData.email);
+  const [phonenumber, setphonenumber] = useState(UserData.phoneNumber);
+  const [country, setcountry] = useState(UserData.country);
+  const [adress, setadress] = useState(UserData.address);
+  const [error, seterror] = useState('');
 
-  const initialUserData = JSON.parse(localStorage.getItem('userData')) || {
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    phoneNumber: '',
-    address: '',
-    country: '',
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    localStorage.removeItem('userData');
+    navigate('/reset-request');
+    window.location.reload();
   };
 
-  const [userData, setUserData] = useState({ ...initialUserData });
-  const [isEditing, setIsEditing] = useState({
-    firstName: false,
-    lastName: false,
-    username: false,
-    phoneNumber: false,
-    address: false,
-    country: false,
-  });
 
-  useEffect(() => {
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
-    if (storedUserData) {
-      setUserData(storedUserData);
-    }
-  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleEdit = (field) => {
-    setIsEditing({ ...isEditing, [field]: true });
-  };
-
-  const handleSave = async (field) => {
-    setIsEditing({ ...isEditing, [field]: false });
-    const newValue = userData[field];
-
-    const userId = userData.id;
-    console.log(userId);
     try {
-      const response = await axios.put(`http://particulierlb.com/update/${userId}`, {
-
-        updateFields: field,
-        updateValues: newValue,
+      const response = await axios.put(`http://localhost:8081/update/${userId}`, {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        phonenumber: phonenumber,
+        country: country,
+        adress: adress,
       });
-
-      console.log(response);
+      console.log(response)
+      if (response.data.status === 'Success') {
+        seterror('');
+        toast.success(response.data.message)
+      } else {
+        seterror('Failed to update user data');
+      }
     } catch (error) {
-      console.error('Error updating user data in the database:', error);
+      seterror('Error updating user data in the database');
+      console.error(error);
     }
-
-    const updatedUserData = { ...userData, [field]: newValue };
-    localStorage.setItem('userData', JSON.stringify(updatedUserData));
-
-    setUserData(updatedUserData);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
-  };
 
-  const renderField = (label, field, icon) => {
-    return (
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={1}>
-          {icon}
-        </Grid>
-        <Grid item xs={6}>
-          <label className="font-semibold text-gray-600">
-            {label}:
-          </label>
-        </Grid>
-        <Grid item xs={4}>
-          {isEditing[field] ? (
-            <div className="flex items-center">
-              <TextField
-                name={field}
-                value={userData[field]}
-                onChange={handleChange}
-                variant="outlined"
-                size="small"
-                color="primary"
-              />
-              <IconButton onClick={() => handleSave(field)}>
-                <CheckIcon color="success" />
-              </IconButton>
-            </div>
-          ) : (
-            <div className="flex items-center">
-              <Typography variant="body1" component="div">
-                {userData[field]}
-              </Typography>
-              {field !== 'email' && (
-                <IconButton onClick={() => handleEdit(field)}>
-                  <EditIcon color="primary" />
-                </IconButton>
-              )}
-            </div>
-          )}
-        </Grid>
-      </Grid>
-    );
-  };
 
   return (
-    <Container maxWidth="sm" style={{ marginTop: '20px' }}>
-      <Typography variant="h4" gutterBottom>
-        User Profile
-      </Typography>
-      <Paper elevation={3} style={{ padding: '20px' }}>
-        {renderField('First Name', 'firstName', <AccountCircleIcon />)}
-        {renderField('Last Name', 'lastName', <AccountCircleIcon />)}
-        {renderField('Email', 'email', <EmailIcon />)}
-        {renderField('Phone Number', 'phoneNumber', <PhoneIcon />)}
-        {renderField('Country', 'country', <LocationOnIcon />)}
-        {renderField('Address', 'address', <LocationOnIcon />)}
-      </Paper>
-    </Container>
+    <div className='h-screen lg:h-[59.6svh] md:p-5 flex items-center justify-center bg-gray-200 flex-col'>
+      <h1 className="text-xl md:text-3xl font-extrabold text-gray-800 uppercase mb-4">
+        Edit Profile for{' '}
+        <p className="font-bold text-xl md:text-4xl text-gray-500">{UserData.firstName} {UserData.lastName}</p>
+      </h1>
+      <Container maxWidth="md">
+        <Paper elevation={1} style={{ padding: '25px', marginTop: '24px' }}>
+
+          <form onSubmit={handleSubmit} className="space-y-2">
+            <Grid container spacing={2}>
+              <Grid item xs={100} sm={6} >
+
+                <TextField
+                  type='text'
+                  label="First Name"
+                  fullWidth
+                  variant="outlined"
+                  value={firstname ? firstname : UserData.firstName}
+                  onChange={(e) => setfirstname(e.target.value)}
+                  required
+                />
+              </Grid>
+              <Grid item xs={100} sm={6}>
+
+                <TextField
+                  type='text'
+                  label="Last Name"
+                  fullWidth
+                  variant="outlined"
+                  value={lastname}
+                  onChange={(e) => setlastname(e.target.value)}
+                  required
+                />
+              </Grid>
+            </Grid>
+
+
+            <Grid container spacing={2}>
+              <Grid item xs={100} sm={6}>
+                <TextField
+                  type='email'
+                  label="Email"
+                  fullWidth
+                  variant="outlined"
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
+                  required
+                />
+              </Grid>
+              <Grid item xs={100} sm={6}>
+                <TextField
+                  type='tel'
+                  label="Phone Number"
+                  fullWidth
+                  variant="outlined"
+                  value={phonenumber}
+                  onChange={(e) => setphonenumber(e.target.value)}
+                  required
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={100} sm={6}>
+                <TextField
+                  type='text'
+                  label="Country"
+                  fullWidth
+                  variant="outlined"
+                  value={country}
+                  onChange={(e) => setcountry(e.target.value)}
+                  required
+                />
+              </Grid>
+              <Grid item xs={100} sm={6}>
+                <TextField
+                  type='text'
+                  label="Adress"
+                  fullWidth
+                  variant="outlined"
+                  value={adress}
+                  onChange={(e) => setadress(e.target.value)}
+                  required
+                />
+              </Grid>
+            </Grid>
+            {error && (
+              <div className="text-red-600">{error}</div>
+            )}
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Edit
+            </Button>
+          </form>
+        </Paper>
+      </Container>
+      <div className='flex border  mt-2 p-1 rounded-md items-end justify-end'>
+        <a onClick={handleLogout} className=' cursor-pointer text-[18px] text-blue-600 font-semibold hover:text-black'>Reset Password</a>
+      </div>
+    </div >
+
   );
 };
 
