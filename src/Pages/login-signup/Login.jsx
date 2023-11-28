@@ -19,7 +19,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8081/login`, {
+      const response = await axios.post(`https://leparticulier-backend.onrender.com/login`, {
         email,
         password,
       });
@@ -27,30 +27,26 @@ const Login = () => {
       if (response.status === 200) {
         setError('');
         const userData = {
-          address: response.data.userData.adress,
+          adress: response.data.userData.adress,
           country: response.data.userData.country,
           email: response.data.userData.email,
-          firstName: response.data.userData.firstname,
-          lastName: response.data.userData.lastname,
-          phoneNumber: response.data.userData.phonenumber,
+          firstname: response.data.userData.firstname,
+          lastname: response.data.userData.lastname,
+          phonenumber: response.data.userData.phonenumber,
           id: response.data.userData.id,
         };
         localStorage.setItem('userData', JSON.stringify(userData));
-
-
-        console.log(response.data);
         toast.success(response.data.Message, {
           hideProgressBar: true,
         });
         navigate("/");
-
         setTimeout(() => {
           window.location.reload();
         }, 2000);
       }
     } catch (error) {
       setError(error.response.data.Error);
-      console.log(error);
+      console.log(error.response.data.Error);
     }
   };
 
@@ -70,6 +66,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setemail(e.target.value)}
               required
+
             />
 
 
@@ -93,17 +90,22 @@ const Login = () => {
               }}
             />
             <div className='flex items-end justify-end'>
-              <Link to="/reset-request" className=' text-blue-600 font-semibold hover:text-blue-400'>Forget Password</Link>
+              <Link to="/reset-request" className=' text-gray-800 font-semibold hover:text-gray-400'>Forget Password</Link>
             </div>
 
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+            >
               Login
             </Button>
             <div className="flex">
-              <span className=' text-gray-600 font-semibold '> Dont Have An account? <Link to="/signup" className='hover:text-blue-400 text-blue-600' >Sign Up</Link></span>
+              <span className=' text-gray-600 font-semibold '> Dont Have An account? <Link to="/signup" className='hover:text-gray-400 text-gray-800' >Sign Up</Link></span>
             </div>
           </form>
         </Paper>

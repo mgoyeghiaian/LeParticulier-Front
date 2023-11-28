@@ -1,11 +1,11 @@
 import { useLocation } from "react-router-dom"
-import Resrvation from "../Resrvation/Resrvation"
-import AboutUS from "./AboutUs/AboutUS"
+import Resrvation from "./Resrvation/Resrvation"
 import Gallery from "./Gallery/Gallery"
 import Hero from "./Hero/Hero"
 import Social from "./SocialMedia/Social"
 import { useEffect } from "react"
 import { Element, scroller } from "react-scroll"
+import AboutUS from "./AboutUs/AboutUs"
 const Home = () => {
   const location = useLocation();
 
@@ -25,7 +25,9 @@ const Home = () => {
       <Element name="aboutUs">
         <AboutUS />
       </Element>
-      <Resrvation />
+      <Element name="resrvation">
+        <Resrvation />
+      </Element>
       <Gallery />
       <Social />
     </>

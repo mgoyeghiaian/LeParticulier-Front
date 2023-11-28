@@ -1,5 +1,6 @@
 import { Facebook, Instagram } from "@mui/icons-material";
-import In2infoLogo from '../assets/in2infoLogo.png'
+import In2infoLogo from '../assets/in2infoLogo.png';
+import Logo from '../assets/LogoBlack.png';
 import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,18 +12,18 @@ const Footer = () => {
 
 
   return (
-    <div className="w-full bg-[#181818] text-gray-200 flex flex-col items-center justify-between h-auto">
+    <div className="w-full bg-[#141717] text-gray-200 flex flex-col items-center justify-between h-auto">
       <div className=" mt-16 flex flex-col items-center justify-center gap-4 mb-5">
         <div>
-          <img src={In2infoLogo} alt="Logo" className="w-16 bg-[#D1D5DB] p-2  rounded-sm" />
+          <img src={Logo} alt="Logo" className=" p-2 w-60 rounded-sm" />
         </div>
         <div className="flex flex-col items-center justify-center gap-1 md:flex-row">
           <span>Hazmieh | Adress Street Name No. 1234 </span> <span> <span className=" hidden md:inline">|</span> Beirut | Lebanon</span>
         </div>
 
         <div className="flex gap-3 items-center text-[15px] flex-col md:flex-row">
-          <a href="tel:+9615123456"><span className='hover:text-gray-500'> +961 (512) 3456</span></a><span className=" hidden md:inline">|</span>
-          <a href="mailto:info@leparticulier.com"><span className='hover:text-gray-500 '>INFO@LEPARTICULER.COM</span> </a>
+          <a href="tel:+9615123456"><span className='hover:text-gray-500 cursor-pointer'> +961 (512) 3456</span></a><span className=" hidden md:inline">|</span>
+          <a href="mailto:info@leparticulier.com"><span className='hover:text-gray-500 cursor-pointer '>INFO@LEPARTICULER.COM</span> </a>
         </div>
 
         <div className="flex gap-2 mt-4">

@@ -13,10 +13,9 @@ const ResetRequest = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:8081/request-reset-password`, {
+      const response = await axios.post(`https://leparticulier-backend.onrender.com/request-reset-password`, {
         email,
       });
-
       if (response.status === 200) {
         toast.success(response.data.Status, {
           hideProgressBar: true,
@@ -26,7 +25,7 @@ const ResetRequest = () => {
       }
     } catch (error) {
       setError(error.response.data.Error);
-      console.log(error.response)
+      console.log(error.response.data.Error)
     }
   };
 
@@ -54,7 +53,10 @@ const ResetRequest = () => {
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button type="submit" variant="contained" color="primary" fullWidth
+              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+
+            >
               Reset Password
             </Button>
           </form>

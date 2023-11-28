@@ -4,7 +4,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon, } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import logo from '../assets/in2infoLogo.png'
+import logo from '../assets/LogoWhite.png'
+import logoB from '../assets/LogoBlack.png'
 import Profile from './Profile';
 import Avatar from '@mui/material/Avatar';
 
@@ -38,23 +39,23 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-4 text-black font-semibold bg-white ">
+    <nav className="p-4 text-black cursor-pointer  bg-white ">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="hidden items-center gap-10 text-[15px] lg:flex">
-          <a href="tel:+9615123456">T|<span className='hover:text-gray-500'> +961 (512) 3456</span></a>
-          <a href="mailto:info@leparticulier.com"><span className='hover:text-gray-500 '>INFO@LEPARTICULER.COM</span> </a>
+        <div className="hidden items-center gap-10 text-[12px] lg:flex">
+          <a href="tel:+9615123456" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2'>T: +961 (512) 3456</a>
+          <a href="mailto:info@leparticulier.com" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2'> INFO@LEPARTICULER.COM</a>
         </div>
 
         <RouterLink to="/" onClick={closeMobileMenu}>
-          <img src={logo} alt="Logo" className=" w-32" />
+          <img src={logo} alt="Logo" className=" w-52  hover:opacity-60 " />
         </RouterLink>
 
         <div className="md:hidden flex justify-center items-center">
           {userData ? (
             <Profile />) : (
 
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-              <Tooltip title="Login">
+            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', cursor: "pointer" }}>
+              <Tooltip title="Login" >
                 <IconButton
                   onClick={handleloginclick}
                   size="small"
@@ -63,7 +64,8 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                 >
-                  <Avatar sx={{ width: 32, height: 32, background: "black" }} />
+                  <Avatar sx={{ width: 25, height: 25, background: "black", cursor: "pointer" }}
+                  />
                 </IconButton>
               </Tooltip>
             </Box>
@@ -74,50 +76,47 @@ const Navbar = () => {
             aria-label="Toggle Menu"
             onClick={toggleMobileMenu}
           >
-
-
-
             {mobileMenuOpen ? (
 
-              <CloseIcon style={{ fontSize: 38, color: 'gray', zIndex: "500" }} />
+              <CloseIcon style={{ fontSize: 25, color: 'gray', zIndex: "500" }} />
             ) : (
-              <MenuIcon style={{ fontSize: 38, color: 'gray' }} />
+              <MenuIcon style={{ fontSize: 25, color: 'gray' }} />
             )}
           </IconButton>
         </div>
 
         <div
-          className={`fixed top-0 left-0 w-screen h-screen bg-[#19191C] transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          className={`fixed top-0 left-0 w-screen h-screen bg-[#141717] transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
             } transition-transform ease-in-out duration-300 z-50`}
         >
           <div className="flex flex-col mt-10 h-full gap-5 items-center px-10 py-32 text-white text-[21px] ">
             <RouterLink to="/" onClick={closeMobileMenu}
             >
-              <img src={logo} alt="Logo" className=" w-32 bg-[#D1D5DB] p-2  rounded-sm" />
+              <img src={logoB} alt="Logo" className=" w-60 p-2  rounded-sm" />
             </RouterLink>
             <ScrollLink
               to='/'
               onClick={() => {
                 scrollToSection("aboutUs");
                 closeMobileMenu();
-              }} className="hover:text-gray-700 cursor-pointer"
+              }} className="hover:no-underline  hover:text-gray-400 "
             >
               About Us
             </ScrollLink>
             <ScrollLink
-              to="/"
+              to='/'
               onClick={() => {
                 scrollToSection("resrvation");
                 closeMobileMenu();
               }}
-              className="hover:text-gray-700 cursor-pointer"
+              className="hover:no-underline cursor-pointer hover:text-gray-400 "
 
             >
               Reservation
             </ScrollLink>
             <RouterLink
               to='/gallery'
-              className="hover:text-gray-700 cursor-pointer"
+              className="hover:no-underline cursor-pointer hover:text-gray-400 "
               onClick={closeMobileMenu}
 
             >
@@ -125,15 +124,14 @@ const Navbar = () => {
             </RouterLink>
             <RouterLink
               to="/contactus"
-              className="hover:text-gray-700 cursor-pointer"
+              className="hover:no-underline cursor-pointer hover:text-gray-400 "
               onClick={closeMobileMenu}
 
             >
               Contact Us
             </RouterLink>
 
-
-            <div className=" gap-2 text-[14px] text-gray-200 font-semibold flex flex-col justify-center">
+            <div className=" gap-2 text-[14px] text-gray-200  flex flex-col justify-center mt-6">
               <a href="tel:+9615123456" className=' text-center' onClick={closeMobileMenu}
               >T |<span className='hover:text-gray-500'> +961 (512) 3456</span></a>
               <a href="mailto:info@leparticulier.com" onClick={closeMobileMenu}
@@ -142,31 +140,31 @@ const Navbar = () => {
           </div>
 
         </div>
+        <div className="hidden md:flex items-center space-x-5  cursor-pointer text-[15px]">
 
-        <div className="hidden md:flex items-center space-x-4 cursor-pointer text-[15px]">
           <ScrollLink
             to='/'
             onClick={() => scrollToSection("aboutUs")}
-            className="hover:text-gray-700 cursor-pointer hover:border-gray-700  border-white border-b-2"
+            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
           >
             About Us
           </ScrollLink>
           <ScrollLink
-            to="/"
+            to='/'
             onClick={() => scrollToSection("resrvation")}
-            className="hover:text-gray-700 cursor-pointer hover:border-gray-700  border-white border-b-2"
+            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
           >
             Reservation
           </ScrollLink>
           <RouterLink
             to='/gallery'
-            className="hover:text-gray-700 cursor-pointer hover:border-gray-700  border-white border-b-2"
+            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
           >
             Gallery
           </RouterLink>
           <RouterLink
             to="/contactus"
-            className="hover:text-gray-700 cursor-pointer hover:border-gray-700  border-white border-b-2"
+            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
           >
             Contact Us
           </RouterLink>
@@ -175,8 +173,9 @@ const Navbar = () => {
               <Profile />
             </>
           ) : (
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-              <Tooltip title="Login">
+            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: "center", cursor: "pointer" }}>
+              <Tooltip title="Login" className=' cursor-pointer'
+              >
                 <IconButton
                   onClick={handleloginclick}
                   size="small"
@@ -184,16 +183,15 @@ const Navbar = () => {
                   aria-controls={open ? 'account-menu' : undefined}
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
+                  className=' cursor-pointer'
                 >
-                  <Avatar sx={{ width: 32, height: 32, background: "black" }} />
+                  <Avatar sx={{ width: 25, height: 25, background: "gray", cursor: "pointer" }} />
                 </IconButton>
               </Tooltip>
             </Box>
           )}
         </div>
-
-
-      </div>
+      </div >
     </nav >
   );
 };

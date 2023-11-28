@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Profile() {
   const navigate = useNavigate();
   const [userData, setUserData] = React.useState('');
-  const firstLetter = userData.firstName ? userData.firstName.charAt(0) : "";
+  const firstLetter = userData.firstname ? userData.firstname.charAt(0) : "";
   console.log("Data", userData)
 
   React.useEffect(() => {
@@ -58,7 +58,7 @@ export default function Profile() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32, background: "black" }}>{firstLetter}</Avatar>
+            <Avatar sx={{ width: 32, height: 32, background: "#141717" }}>{firstLetter}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -98,7 +98,7 @@ export default function Profile() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleProfile}>
-          <Avatar style={{ background: "black" }} /> <span className=' font-bold'>{userData.firstName + ' ' + userData.lastName}</span>
+          <Avatar style={{ background: "black" }} /> <span className=' font-bold'>{userData.firstname + ' ' + userData.lastname}</span>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>

@@ -16,13 +16,18 @@ const Signup = () => {
   const [country, setcountry] = useState('');
   const [adress, setadress] = useState('');
   const [phonenumber, setphonenumber] = useState('');
-
   const [error, setError] = useState('');
+
+  const handlePhoneInputChange = (e) => {
+    const inputValue = e.target.value;
+    const numericValue = inputValue.replace(/\D/g, '');
+    setphonenumber(numericValue);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://particulierlb.com/service/index.js/register`, {
+      const response = await axios.post(`https://leparticulier-backend.onrender.com/register`, {
         email,
         password,
         firstname,
@@ -31,10 +36,9 @@ const Signup = () => {
         adress,
         phonenumber,
       });
-
       if (response.status === 200) {
         setError('');
-        console.log(response.data.message);
+
         toast.success(response.data.message, {
           hideProgressBar: true,
         });
@@ -45,14 +49,14 @@ const Signup = () => {
         }, 2000);
       }
     } catch (error) {
-      setError(error.response);
-      console.log(error);
+      setError(error.response.data.Error);
+      console.log(error.response.data.Error);
     }
   };
 
   return (
-    <div className='h-screen lg:h-[59.6svh] md:p-5 flex items-center justify-center bg-gray-200 flex-col'>
-      <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4">
+    <div className='h-[69.9svh] flex items-center justify-center bg-gray-200 flex-col'>
+      <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4 p-10">
         <span className="font-bold text-4xl text-gray-500">Signup</span>
       </h1>
       <Container maxWidth="md">
@@ -100,12 +104,14 @@ const Signup = () => {
               </Grid>
               <Grid item xs={100} sm={6}>
                 <TextField
-                  type='number'
+                  type='tel'
                   label="Phone Number"
                   fullWidth
                   variant="outlined"
                   value={phonenumber}
-                  onChange={(e) => setphonenumber(e.target.value)}
+                  onChange={handlePhoneInputChange}
+
+                  // onChange={(e) => setphonenumber(e.target.value)}
                   required
                 />
               </Grid>
@@ -156,11 +162,13 @@ const Signup = () => {
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button type="submit" variant="contained" color="primary" fullWidth
+              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+            >
               Signup
             </Button>
             <div className="flex">
-              <span className='text-gray-600 font-semibold'>Already have an account? <Link to="/login" className='hover:text-blue-400 text-blue-600'>Login</Link></span>
+              <span className='text-gray-600 font-semibold'>Already have an account? <Link to="/login" className='hover:text-gray-400 text-gray-700'>Login</Link></span>
             </div>
           </form>
         </Paper>

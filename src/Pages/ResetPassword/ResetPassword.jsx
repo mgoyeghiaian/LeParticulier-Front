@@ -18,7 +18,7 @@ const ResetPassword = () => {
 
   const [user, setUser] = useState('');
   useEffect(() => {
-    axios.get(`http://localhost:8081/user/${token}`)
+    axios.get(`https://leparticulier-backend.onrender.com/user/${token}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -40,7 +40,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:8081/reset-password/${user.id}`, {
+      const response = await axios.post(`https://leparticulier-backend.onrender.com/reset-password/${user.id}`, {
         newPassword,
       });
 
@@ -107,7 +107,9 @@ const ResetPassword = () => {
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button type="submit" variant="contained" color="primary" fullWidth
+              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+            >
               Reset Password
             </Button>
           </form>

@@ -15,7 +15,7 @@
 }
 
 .scroll-to-top.visible {
-  background-color: #1b1b1b1e;
+  background-color: #141717;
   stroke: #554f4f;
   border: 2px solid gray;
 }
@@ -31,7 +31,7 @@
   margin: auto;
   transform-origin: center;
   transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-  stroke: #0b050501;
+  stroke: #141717;
   fill: transparent;
 }
 

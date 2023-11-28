@@ -9,12 +9,12 @@ const ProfileEdit = () => {
   const UserData = JSON.parse(localStorage.getItem('userData'))
   const userId = UserData.id
 
-  const [firstname, setfirstname] = useState('');
-  const [lastname, setlastname] = useState(UserData.lastName);
+  const [firstname, setfirstname] = useState(UserData.firstname);
+  const [lastname, setlastname] = useState(UserData.lastname);
   const [email, setemail] = useState(UserData.email);
-  const [phonenumber, setphonenumber] = useState(UserData.phoneNumber);
+  const [phonenumber, setphonenumber] = useState(UserData.phonenumber);
   const [country, setcountry] = useState(UserData.country);
-  const [adress, setadress] = useState(UserData.address);
+  const [adress, setadress] = useState(UserData.adress);
   const [error, seterror] = useState('');
 
   const navigate = useNavigate()
@@ -23,13 +23,21 @@ const ProfileEdit = () => {
     navigate('/reset-request');
     window.location.reload();
   };
-
+  const userData = {
+    adress: adress,
+    country: country,
+    email: email,
+    firstname: firstname,
+    id: userId,
+    lastname: lastname,
+    phonenumber: phonenumber,
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.put(`http://localhost:8081/update/${userId}`, {
+      const response = await axios.put(`https://leparticulier-backend.onrender.com/update/${userId}`, {
         firstname: firstname,
         lastname: lastname,
         email: email,
@@ -41,6 +49,10 @@ const ProfileEdit = () => {
       if (response.data.status === 'Success') {
         seterror('');
         toast.success(response.data.message)
+        localStorage.setItem('userData', JSON.stringify(userData));
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       } else {
         seterror('Failed to update user data');
       }
@@ -100,6 +112,7 @@ const ProfileEdit = () => {
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
                   required
+                  disabled
                 />
               </Grid>
               <Grid item xs={100} sm={6}>
