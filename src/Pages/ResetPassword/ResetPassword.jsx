@@ -60,10 +60,10 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className='h-[61.1svh] flex items-center justify-center bg-gray-200 flex-col'>
-      <h1 className="text-xl md:text-3xl font-extrabold text-gray-800 uppercase mb-4">
+    <div className='h-[100%] p-[5%] flex items-center justify-center bg-gray-200 flex-col'>
+      <h1 className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 " style={{ 'fontFamily': 'Playfair Display', }}>
         Reset Password for{' '}
-        <p className="font-bold text-xl md:text-4xl text-gray-500">{user.email}</p>
+        <p className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 " style={{ 'fontFamily': 'Playfair Display', }}>{user.email}</p>
       </h1>
       <Container maxWidth="sm">
         <Paper elevation={3} style={{ padding: '24px', marginTop: '24px' }}>

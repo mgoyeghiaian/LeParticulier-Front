@@ -43,7 +43,7 @@ const Hero = () => {
       <ScrollLink to="/"
         onClick={() => {
           scrollToSection("resrvation");
-        }} className=" md:flex absolute bottom-8 cursor-pointer hidden  right-20 transform -translate-y-1/2 md:text-xl mt-3 text-sm  border border-black text-black  bg-gray-400 hover:bg-opacity-100 bg-opacity-90 p-2 pr-5 pl-5 rounded text-center hover-bg-opacity-100 transition duration-300  hover:no-underline hover:text-gray-600">
+        }} className=" md:flex absolute bottom-8 rsor-pointer hidden  right-20 border border-black text-black  bg-gray-400 bg-opacity-50 p-2 pr-5 pl-5 rounded text-center hover:bg-opacity-100 transition duration-300 cursor-pointer hover:no-underline hover:text-black">
         BOOK NOW
       </ScrollLink>
     </div>

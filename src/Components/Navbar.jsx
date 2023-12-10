@@ -42,12 +42,12 @@ const Navbar = () => {
     <nav className="p-4 text-black cursor-pointer  bg-white ">
       <div className="container mx-auto flex items-center justify-between">
         <div className="hidden items-center gap-10 text-[12px] lg:flex">
-          <a href="tel:+9615123456" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2'>T: +961 (512) 3456</a>
+          <a href="tel:+9613785866" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2'>T: +961 3 785866</a>
           <a href="mailto:info@leparticulier.com" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2'> INFO@LEPARTICULER.COM</a>
         </div>
 
         <RouterLink to="/" onClick={closeMobileMenu}>
-          <img src={logo} alt="Logo" className=" w-52  hover:opacity-60 " />
+          <img src={logo} alt="Logo" className=" w-64  hover:opacity-60 " />
         </RouterLink>
 
         <div className="md:hidden flex justify-center items-center">
@@ -122,14 +122,14 @@ const Navbar = () => {
             >
               Gallery
             </RouterLink>
-            <RouterLink
+            {/* <RouterLink
               to="/contactus"
               className="hover:no-underline cursor-pointer hover:text-gray-400 "
               onClick={closeMobileMenu}
 
             >
               Contact Us
-            </RouterLink>
+            </RouterLink> */}
 
             <div className=" gap-2 text-[14px] text-gray-200  flex flex-col justify-center mt-6">
               <a href="tel:+9615123456" className=' text-center' onClick={closeMobileMenu}
@@ -162,12 +162,12 @@ const Navbar = () => {
           >
             Gallery
           </RouterLink>
-          <RouterLink
+          {/* <RouterLink
             to="/contactus"
             className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
           >
             Contact Us
-          </RouterLink>
+          </RouterLink> */}
           {userData ? (
             <>
               <Profile />
@@ -179,13 +179,12 @@ const Navbar = () => {
                 <IconButton
                   onClick={handleloginclick}
                   size="small"
-                  sx={{ ml: 2 }}
                   aria-controls={open ? 'account-menu' : undefined}
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                   className=' cursor-pointer'
                 >
-                  <Avatar sx={{ width: 25, height: 25, background: "gray", cursor: "pointer" }} />
+                  <Avatar sx={{ width: 25, height: 25, background: "black", cursor: "pointer" }} />
                 </IconButton>
               </Tooltip>
             </Box>

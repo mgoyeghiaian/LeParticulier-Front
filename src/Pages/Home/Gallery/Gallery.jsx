@@ -1,13 +1,11 @@
-import img from '../../../assets/BeforSocialMediaSection.png'
+import img from '../../../assets/BeforSocialMediaSection.png';
 
 const Gallery = () => {
   return (
-    <div className="relative flex items-center justify-center w-full h-full">
-      <img src={img} alt="Gallery Image" className="w-full " />
-      <div className="absolute p-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center flex flex-col gap-1 lg:gap-4 text-white">
-        <small className=" xs:text-[10px] sm:text-[13px] md:text-[20px] lg:text-2xl">Le Particulier</small>
-        <h1 className=" xs:text-[8px] sm:text-[12px] md:text-[23px] lg:text-3xl" style={{ 'fontFamily': 'Playfair Display', }}>EXCEPTIONAL LOCATION WITH <span className=' block'> EXCEPTIONAL CHARACTER</span></h1>
-      </div>
+    <div className="text-center flex flex-col justify-center items-center lg:gap-4 text-white w-full h-[30vh] lg:h-[70vh] bg-cover bg-center relative" style={{ backgroundImage: `url(${img})`, fontFamily: 'Playfair Display' }}>
+      <div className="absolute inset-0 opacity-50"></div>
+      <p className="text-[18px] md:text-xl lg:text-2xl xl:text-3xl mb-2">Particulier</p>
+      <p className="text-[14px] md:text-lg lg:text-xl xl:text-2xl leading-snug">EXCEPTIONAL LOCATION WITH <span className='block'>EXCEPTIONAL CHARACTER</span></p>
     </div>
   );
 }

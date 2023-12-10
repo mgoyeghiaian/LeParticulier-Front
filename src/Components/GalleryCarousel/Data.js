@@ -1,6 +1,6 @@
 import Lobby from '../../assets/Lobby/_D1_4630.jpg'
 import Kidsarea from '../../assets/Kidsarea/5.jpg'
-import ExpImg from '../../assets/Expirence/Expirence.jpg'
+import Cigar from '../../assets/Cigar/MainCigar.jpg'
 import FitImg from '../../assets/Fitness/6.jpg'
 import Pool from '../../assets/Pool/6.jpg'
 
@@ -19,9 +19,9 @@ const GalleryCarouselData = [
   },
   {
     id: 3,
-    image: ExpImg,
-    title: "Experience",
-    url: "Experience"
+    image: Cigar,
+    title: "Cigar Lounge",
+    url: "Cigar"
   },
   {
     id: 4,

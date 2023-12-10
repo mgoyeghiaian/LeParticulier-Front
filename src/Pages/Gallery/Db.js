@@ -4,8 +4,7 @@ import Lobby3 from '../../assets/Lobby/3.jpg';
 import Lobby4 from '../../assets/Lobby/4.jpg';
 import Lobby5 from '../../assets/Lobby/5.jpg';
 import Lobby6 from '../../assets/Lobby/6.jpg';
-import Lobby7 from '../../assets/Lobby/7.jpg';
-import Lobby8 from '../../assets/Lobby/8.jpg';
+
 
 import Gym1 from '../../assets/Fitness/2.jpg';
 import Gym2 from '../../assets/Fitness/4.jpg';
@@ -27,22 +26,27 @@ import Kids3 from '../../assets/Kidsarea/3.jpg'
 import Kids4 from '../../assets/Kidsarea/4.jpg'
 import Kids5 from '../../assets/Kidsarea/5.jpg'
 
-import Exp1 from '../../assets/Expirence/Expirence.jpg'
-import Exp2 from '../../assets/Expirence/Expirence1.jpg';
-import Exp3 from '../../assets/Expirence/Expirence2.jpg'
+import Cigar1 from '../../assets/Cigar/7.JPG'
+import Cigar2 from '../../assets/Cigar/8.JPG';
+import Cigar3 from '../../assets/Cigar/_D1_4643.JPG'
+import Cigar4 from '../../assets/Cigar/_D1_4647.JPG'
 
 const Experience = [
   {
     id: 1,
-    image: Exp1,
+    image: Cigar1,
   },
   {
     id: 2,
-    image: Exp2,
+    image: Cigar2,
   },
   {
     id: 3,
-    image: Exp3,
+    image: Cigar3,
+  },
+  {
+    id: 4,
+    image: Cigar4,
   },
 ];
 
@@ -118,14 +122,7 @@ const Lobby = [
     id: 6,
     image: Lobby6,
   },
-  {
-    id: 7,
-    image: Lobby7,
-  },
-  {
-    id: 8,
-    image: Lobby8,
-  },
+
 
 ];
 

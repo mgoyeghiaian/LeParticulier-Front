@@ -55,9 +55,9 @@ const Signup = () => {
   };
 
   return (
-    <div className='h-[69.9svh] flex items-center justify-center bg-gray-200 flex-col'>
-      <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4 p-10">
-        <span className="font-bold text-4xl text-gray-500">Signup</span>
+    <div className='h-[100%] p-[5%] flex items-center justify-center bg-gray-200 flex-col'>
+      <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4 ">
+        <span className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 " style={{ 'fontFamily': 'Playfair Display', }}>Signup</span>
       </h1>
       <Container maxWidth="md">
         <Paper elevation={1} style={{ padding: '25px', marginTop: '24px' }}>

@@ -30,9 +30,9 @@ const ResetRequest = () => {
   };
 
   return (
-    <div className='h-[61.1svh] flex items-center justify-center bg-gray-200 flex-col'>
+    <div className='h-[100%] p-[5%] flex items-center justify-center bg-gray-200 flex-col'>
       <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4">
-        <span className="font-bold text-xl md:text-4xl  text-gray-500">Reset Password Request</span>
+        <span className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 " style={{ 'fontFamily': 'Playfair Display', }}>Reset Password Request</span>
       </h1>
       <Container maxWidth="sm">
         <Paper elevation={3} style={{ padding: '24px', marginTop: '24px' }}>

@@ -6,8 +6,8 @@ const SocialPost = () => {
   return (
     <div className="flex justify-center flex-col items-center h-auto w-auto p-5 pt-10 pb-10">
       <div className="flex flex-col justify-center items-center gap-4 text-center">
-        <p className="text-xs md:text-lg">SOCIAL MEDIA</p>
-        <h1 className=' text-2xl lg:text-3xl font-semibold tracking-wider ' style={{ 'fontFamily': 'Playfair Display', }}>CATCH UP WITH OUR LATEST
+        <p className="text-md md:text-lg">SOCIAL MEDIA</p>
+        <h1 className=' text-lg lg:text-3xl font-semibold tracking-wider ' style={{ 'fontFamily': 'Playfair Display', }}>CATCH UP WITH OUR LATEST
           <span className="block">AND</span>
           <span className="block">
             EXCLUSIVE EVENTS</span></h1>

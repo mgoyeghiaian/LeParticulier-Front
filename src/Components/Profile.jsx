@@ -53,12 +53,11 @@ export default function Profile() {
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32, background: "#141717" }}>{firstLetter}</Avatar>
+            <Avatar sx={{ width: 25, height: 25, background: "black", cursor: "pointer", display: 'flex', alignItems: 'center', textAlign: 'center', fontSize:'15px' }}>{firstLetter}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
