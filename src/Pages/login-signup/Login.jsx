@@ -2,8 +2,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import { TextField, Button, Container, Paper, IconButton, InputAdornment, } from '@mui/material';
+import { TextField, Button, Container, Paper, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { ThreeDots } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
@@ -12,13 +13,13 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setemail] = useState('');
   const [error, setError] = useState('');
-
-
-
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
+
       const response = await axios.post(`https://leparticulier-backend.onrender.com/login`, {
         email,
         password,
@@ -46,7 +47,8 @@ const Login = () => {
       }
     } catch (error) {
       setError(error.response.data.Error);
-      console.log(error.response.data.Error);
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -66,10 +68,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setemail(e.target.value)}
               required
-
             />
-
-
 
             <TextField
               type={passwordVisible ? 'text' : 'password'}
@@ -96,14 +95,31 @@ const Login = () => {
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
-            >
-              Login
-            </Button>
+
+            {loading ? (
+              <div className="flex justify-center">
+                <ThreeDots
+                  height="40"
+                  width="40"
+                  radius="9"
+                  color="gray"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </div>
+            ) : (
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+              >
+                Login
+              </Button>
+            )}
+
             <div className="flex">
               <span className=' text-gray-600 font-semibold '> Dont Have An account? <Link to="/signup" className='hover:text-gray-400 text-gray-800' >Sign Up</Link></span>
             </div>

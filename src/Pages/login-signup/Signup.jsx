@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Paper, IconButton, InputAdornment, Grid, } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { ThreeDots } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
@@ -17,6 +18,7 @@ const Signup = () => {
   const [adress, setadress] = useState('');
   const [phonenumber, setphonenumber] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handlePhoneInputChange = (e) => {
     const inputValue = e.target.value;
@@ -27,6 +29,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.post(`https://leparticulier-backend.onrender.com/register`, {
         email,
         password,
@@ -38,30 +41,32 @@ const Signup = () => {
       });
       if (response.status === 200) {
         setError('');
-
         toast.success(response.data.message, {
           hideProgressBar: true,
         });
         navigate("/login");
-
         setTimeout(() => {
           window.location.reload();
         }, 2000);
       }
     } catch (error) {
       setError(error.response.data.Error);
-      console.log(error.response.data.Error);
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className='h-[100%] p-[5%] flex items-center justify-center bg-gray-200 flex-col'>
+    <div className='h-[100%] p-[2%] md:p-[4%] flex items-center justify-center bg-gray-200 flex-col'>
       <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4 ">
         <span className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 " style={{ 'fontFamily': 'Playfair Display', }}>Signup</span>
       </h1>
       <Container maxWidth="md">
         <Paper elevation={1} style={{ padding: '25px', marginTop: '24px' }}>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-2 flex flex-col gap-2">
             <Grid container spacing={1}>
               <Grid item xs={100} sm={6}>
 
@@ -110,8 +115,6 @@ const Signup = () => {
                   variant="outlined"
                   value={phonenumber}
                   onChange={handlePhoneInputChange}
-
-                  // onChange={(e) => setphonenumber(e.target.value)}
                   required
                 />
               </Grid>
@@ -162,11 +165,30 @@ const Signup = () => {
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button type="submit" variant="contained" color="primary" fullWidth
-              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
-            >
-              Signup
-            </Button>
+            {loading ? (
+              <div className="flex justify-center">
+                <ThreeDots
+                  height="40"
+                  width="40"
+                  radius="9"
+                  color="gray"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </div>
+            ) : (
+
+              <Button type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' }, width: "50%", alignSelf: "center", justifySelf: "center" }}
+              >
+                Signup
+              </Button>
+            )}
+
             <div className="flex">
               <span className='text-gray-600 font-semibold'>Already have an account? <Link to="/login" className='hover:text-gray-400 text-gray-700'>Login</Link></span>
             </div>

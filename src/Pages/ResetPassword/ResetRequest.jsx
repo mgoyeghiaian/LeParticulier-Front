@@ -4,15 +4,18 @@ import { toast } from 'react-toastify';
 import { TextField, Button, Container, Paper, } from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
 
 const ResetRequest = () => {
   const [email, setemail] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const response = await axios.post(`https://leparticulier-backend.onrender.com/request-reset-password`, {
         email,
       });
@@ -25,7 +28,9 @@ const ResetRequest = () => {
       }
     } catch (error) {
       setError(error.response.data.Error);
-      console.log(error.response.data.Error)
+      // console.log(error.response.data.Error)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,12 +58,31 @@ const ResetRequest = () => {
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button type="submit" variant="contained" color="primary" fullWidth
-              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+            {loading ? (
+              <div className="flex justify-center">
+                <ThreeDots
+                  height="40"
+                  width="40"
+                  radius="9"
+                  color="gray"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </div>
+            ) : (
 
-            >
-              Reset Password
-            </Button>
+
+
+              <Button type="submit" variant="contained" color="primary" fullWidth
+                sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+
+              >
+                Reset Password
+              </Button>
+            )}
+
           </form>
         </Paper>
       </Container>

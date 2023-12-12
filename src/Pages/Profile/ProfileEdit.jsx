@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Container, TextField, Grid, Paper, Button } from '@mui/material';
-
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { ThreeDots } from 'react-loader-spinner';
 
 const ProfileEdit = () => {
   const UserData = JSON.parse(localStorage.getItem('userData'))
@@ -16,6 +16,7 @@ const ProfileEdit = () => {
   const [country, setcountry] = useState(UserData.country);
   const [adress, setadress] = useState(UserData.adress);
   const [error, seterror] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate()
   const handleLogout = () => {
@@ -37,6 +38,8 @@ const ProfileEdit = () => {
     e.preventDefault();
 
     try {
+      setLoading(true);
+
       const response = await axios.put(`https://leparticulier-backend.onrender.com/update/${userId}`, {
         firstname: firstname,
         lastname: lastname,
@@ -59,21 +62,22 @@ const ProfileEdit = () => {
     } catch (error) {
       seterror('Error updating user data in the database');
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
 
 
   return (
-    <div className='h-screen lg:h-[59.6svh] md:p-5 flex items-center justify-center bg-gray-200 flex-col'>
-      <h1 className="text-xl md:text-3xl font-extrabold text-gray-800 uppercase mb-4">
-        Edit Profile for{' '}
-        <p className="font-bold text-xl md:text-4xl text-gray-500">{UserData.firstName} {UserData.lastName}</p>
+    <div className='h-[100%] p-[5%] flex items-center justify-center bg-gray-200 flex-col'>
+      <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4">
+        <span className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 " style={{ 'fontFamily': 'Playfair Display', }}> Edit Profile </span>
       </h1>
       <Container maxWidth="md">
         <Paper elevation={1} style={{ padding: '25px', marginTop: '24px' }}>
 
-          <form onSubmit={handleSubmit} className="space-y-2">
+          <form onSubmit={handleSubmit} className="space-y-2 flex flex-col gap-2">
             <Grid container spacing={2}>
               <Grid item xs={100} sm={6} >
 
@@ -154,14 +158,35 @@ const ProfileEdit = () => {
             {error && (
               <div className="text-red-600">{error}</div>
             )}
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Edit
-            </Button>
+
+            {loading ? (
+              <div className="flex justify-center">
+                <ThreeDots
+                  height="40"
+                  width="40"
+                  radius="9"
+                  color="gray"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </div>
+            ) : (
+              <Button type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' }, width: "50%", alignSelf: "center", justifySelf: "center" }}
+              >
+                Edit
+              </Button>
+            )}
+
           </form>
         </Paper>
       </Container>
       <div className='flex border  mt-2 p-1 rounded-md items-end justify-end'>
-        <a onClick={handleLogout} className=' cursor-pointer text-[18px] text-blue-600 font-semibold hover:text-black'>Reset Password</a>
+        <a onClick={handleLogout} className=' cursor-pointer text-gray-600 font-semibold hover:text-gray-500 '>Reset Password</a>
       </div>
     </div >
 

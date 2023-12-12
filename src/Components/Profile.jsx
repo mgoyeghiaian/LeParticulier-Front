@@ -14,7 +14,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const [userData, setUserData] = React.useState('');
   const firstLetter = userData.firstname ? userData.firstname.charAt(0) : "";
-  console.log("Data", userData)
+  // console.log("Data", userData)
 
   React.useEffect(() => {
     const userDataString = localStorage.getItem('userData');
