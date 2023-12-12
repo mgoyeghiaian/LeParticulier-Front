@@ -1,6 +1,6 @@
 
 import GalleryCarousel from '../../../Components/GalleryCarousel/GalleryCarousel'
-import Img from '../../../assets/About UsRImage.png'
+import Img from '../../../assets/About UsRImage.jpg'
 
 const AboutUS = () => {
   return (

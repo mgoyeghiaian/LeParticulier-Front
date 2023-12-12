@@ -1,4 +1,4 @@
-import img from '../../../assets/BeforSocialMediaSection.png';
+import img from '../../../assets/BeforSocialMediaSection.jpg';
 
 const Gallery = () => {
   return (
