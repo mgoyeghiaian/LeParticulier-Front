@@ -70,16 +70,17 @@ const ProfileEdit = () => {
 
 
   return (
-    <div className='h-[100%] p-[5%] flex items-center justify-center bg-gray-200 flex-col'>
+    <div className='h-[100%] p-[5%] flex items-center justify-center bg-[#ece8e0] flex-col'>
       <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4">
-        <span className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 " style={{ 'fontFamily': 'Playfair Display', }}> Edit Profile </span>
+        <span className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 "> Edit Profile </span>
       </h1>
-      <Container maxWidth="md">
-        <Paper elevation={1} style={{ padding: '25px', marginTop: '24px' }}>
+      <Container maxWidth="md"
+      >
+        <Paper elevation={1} style={{ padding: '25px', marginTop: '24px', background: '#E5E1DA' }}>
 
-          <form onSubmit={handleSubmit} className="space-y-2 flex flex-col gap-2">
-            <Grid container spacing={2}>
-              <Grid item xs={100} sm={6} >
+          <form onSubmit={handleSubmit} className="space-y-2  flex flex-col gap-2">
+            <Grid container spacing={2} >
+              <Grid item xs={100} sm={6}  >
 
                 <TextField
                   type='text'
@@ -91,7 +92,7 @@ const ProfileEdit = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={100} sm={6}>
+              <Grid item xs={100} sm={6} >
 
                 <TextField
                   type='text'

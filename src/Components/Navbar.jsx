@@ -39,11 +39,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-4 text-black cursor-pointer  bg-white ">
+    <nav className="p-4 text-black cursor-pointer bg-[#ffffff]">
       <div className="container mx-auto flex items-center justify-between">
         <div className="hidden items-center gap-10 text-[12px] lg:flex">
-          <a href="tel:+9613785866" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2'>T: +961 3 785866</a>
-          <a href="mailto:info@leparticulier.com" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2'> INFO@LEPARTICULER.COM</a>
+          <a href="tel:+9613785866" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-slate-50 border-b-2'>T: +961 3 785866</a>
+          <a href="mailto:info@leparticulier.com" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-slate-50 border-b-2'> INFO@LEPARTICULER.COM</a>
         </div>
 
         <RouterLink to="/" onClick={closeMobileMenu}>
@@ -145,20 +145,20 @@ const Navbar = () => {
           <ScrollLink
             to='/'
             onClick={() => scrollToSection("aboutUs")}
-            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
+            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-slate-50 border-b-2"
           >
             About Us
           </ScrollLink>
           <ScrollLink
             to='/'
             onClick={() => scrollToSection("resrvation")}
-            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
+            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700 border-slate-50 border-b-2"
           >
             Reservation
           </ScrollLink>
           <RouterLink
             to='/gallery'
-            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-white border-b-2"
+            className="hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700 border-slate-50 border-b-2"
           >
             Gallery
           </RouterLink>

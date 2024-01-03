@@ -19,21 +19,17 @@ const Gallery = () => {
     }
   }, [location.hash]);
   return (
-    <>
+    <div className="bg-[#E5E1DA]">
       {/* Pool */}
       <Element name="Pool">
-        <div className=" flex lg:flex-row gap-5 flex-col p-2 lg:p-5 mt-20 lg:mt-20 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
+        <div className=" flex lg:flex-row gap-5 flex-col p-2 lg:pb-0 pt-20 lg:pr-44 lg:pl-44 pb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
           <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
-            <p className=' lg:text-xl text-xl' >POOL</p>
-            <h1 className='text-xl lg:text-3xl font-semibold  tracking-wider cap' style={{ 'fontFamily': 'Playfair Display', }} >
+            <p className=' lg:text-xl text-xl' >Pool (On the Roof with Sea View)</p>
+            <h1 className='text-xl lg:text-3xl font-semibold  tracking-wider cap' >
               RELAX AND REJUVENATE BY THE POLLSIDE, ENJOYING BREATHTAKING VIEWS
             </h1>
             <h4 className=' flex flex-col gap-4 lg:text-justify	lg:text-lg text-[14px] mb-2'>
-              <span>Nestled in the vibrant heart of Hazmieh, Lebanon, Le Particulier is more than just a furnished apartment facility; it&apos;s a lively meeting place and a tranquil power spot all rolled into one. Our establishment seamlessly blends history and the promise of the future, cosmopolitan flair with a touch of greenery, and the beating heart with the soothing soul.</span>
-
-              <span>Set amidst picturesque pine trees forests, Le Particulier offers a small yet enchanting oasis of well-being, just a stone&apos;s throw away from the charming old town of Hazmieh. It&apos;s a place where emotions meet enjoyment, city life harmonizes with quiet moments, and where you can truly unwind.</span>
-
-              <span>We are eagerly awaiting your arrival to share with you our genuine hospitality and provide you with an unforgettable holiday experience - your very own furnished apartment away from home.</span>
+              <span>Take a dip in our rooftop pool and experience leisure like never before. With a panoramic view of the Lebanese coast, our pool offers a refreshing escape. Relax, sip on your favorite beverage, and soak in the sun as you enjoy breathtaking vistas. </span>
             </h4>
           </div>
           <div className=' w-[97%] lg:w-[50%]  h-auto border ' >
@@ -56,7 +52,7 @@ const Gallery = () => {
       {/* Kidsarea */}
       <Element name="Kidsarea">
         <div>
-          <div className="flex lg:flex-row gap-5 flex-col p-2 lg:p-5 mt-20 lg:mt-20 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
+          <div className="flex lg:flex-row gap-5 flex-col lg:pb-0 pt-20 lg:pr-44 lg:pl-44 pb-20 mt-10 lg:mt-0 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
             <div className=' w-[97%] lg:w-[50%]  h-auto border ' >
               <Carousel
                 showStatus={false}
@@ -73,16 +69,12 @@ const Gallery = () => {
             </div>
             <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
 
-              <p className=' lg:text-xl text-xl' >PLAYGROUND FOR KIDS</p>
-              <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap' style={{ 'fontFamily': 'Playfair Display', }} >
+              <p className=' lg:text-xl text-xl' >Kid&apos;s Area</p>
+              <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap'  >
                 A SAFE AND ENJOYABLE SPACE FOR OUR YOUNGER RESIDENTS
               </h1>
               <h4 className=' flex flex-col gap-4 lg:text-justify	lg:text-lg text-[14px] mb-2'>
-                <span>Nestled in the vibrant heart of Hazmieh, Lebanon, Le Particulier is more than just a furnished apartment facility; it&apos;s a lively meeting place and a tranquil power spot all rolled into one. Our establishment seamlessly blends history and the promise of the future, cosmopolitan flair with a touch of greenery, and the beating heart with the soothing soul.</span>
-
-                <span>Set amidst picturesque pine trees forests, Le Particulier offers a small yet enchanting oasis of well-being, just a stone&apos;s throw away from the charming old town of Hazmieh. It&apos;s a place where emotions meet enjoyment, city life harmonizes with quiet moments, and where you can truly unwind.</span>
-
-                <span>We are eagerly awaiting your arrival to share with you our genuine hospitality and provide you with an unforgettable holiday experience - your very own furnished apartment away from home.</span>
+                <span>Families are welcome to explore our dedicated Kid&apos;s Area, where children can play, imagine, and create unforgettable memories. Designed with safety and fun in mind, our kid-friendly space ensures that the youngest members of your family have a delightful and entertaining stay.</span>
               </h4>
 
             </div >
@@ -94,19 +86,15 @@ const Gallery = () => {
 
       <Element name="Cigar">
         <div>
-          <div className=" flex lg:flex-row gap-5 flex-col p-2 lg:p-5 mt-20 lg:mt-20 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
+          <div className=" flex lg:flex-row gap-5 flex-col p-2 lg:pr-44 lg:pl-44 mt-20  mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
             <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
 
               <p className=' lg:text-xl text-xl' >CIGAR LOUNGE</p>
-              <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap' style={{ 'fontFamily': 'Playfair Display', }} >
+              <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap'  >
                 UNWIND IN STYLE AND SOPHISTICATION IN OUR EXCLUSIVE CIGAR LOUNGE
               </h1>
               <h4 className=' flex flex-col gap-4 lg:text-justify	lg:text-lg text-[14px] mb-2'>
-                <span>Nestled in the vibrant heart of Hazmieh, Lebanon, Le Particulier is more than just a furnished apartment facility; it&apos;s a lively meeting place and a tranquil power spot all rolled into one. Our establishment seamlessly blends history and the promise of the future, cosmopolitan flair with a touch of greenery, and the beating heart with the soothing soul.</span>
-
-                <span>Set amidst picturesque pine trees forests, Le Particulier offers a small yet enchanting oasis of well-being, just a stone&apos;s throw away from the charming old town of Hazmieh. It&apos;s a place where emotions meet enjoyment, city life harmonizes with quiet moments, and where you can truly unwind.</span>
-
-                <span>We are eagerly awaiting your arrival to share with you our genuine hospitality and provide you with an unforgettable holiday experience - your very own furnished apartment away from home.</span>
+                <span>Indulge in refined luxury at our Cigar Lounge. Immerse yourself in a sophisticated ambiance and an atmosphere of relaxation. Our lounge provides the perfect setting to savor moments of tranquility and friendliness.</span>
               </h4>
             </div >
             <div className=' w-[97%] lg:w-[50%]  h-auto border ' >
@@ -130,7 +118,7 @@ const Gallery = () => {
 
       {/* Fitness */}
       <Element name="Fitness">
-        <div className="flex lg:flex-row gap-5 flex-col p-2 lg:p-5 mt-20 lg:mt-20 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
+        <div className="flex lg:flex-row gap-5 flex-col p-2 lg:pr-44 lg:pl-44 mt-20 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
           <div className=' w-[97%] lg:w-[50%]  h-auto border ' >
             <Carousel
               showStatus={false}
@@ -148,15 +136,11 @@ const Gallery = () => {
           <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
 
             <p className=' lg:text-xl text-xl' >GYM</p>
-            <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap' style={{ 'fontFamily': 'Playfair Display', }} >
+            <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap'  >
               STAY FIT AND HEALTHY WITH STATE-OF-THE-ART FITNESS FACILITIES
             </h1>
             <h4 className=' flex flex-col gap-4 lg:text-justify	lg:text-lg text-[14px] mb-2'>
-              <span>Nestled in the vibrant heart of Hazmieh, Lebanon, Le Particulier is more than just a furnished apartment facility; it&apos;s a lively meeting place and a tranquil power spot all rolled into one. Our establishment seamlessly blends history and the promise of the future, cosmopolitan flair with a touch of greenery, and the beating heart with the soothing soul.</span>
-
-              <span>Set amidst picturesque pine trees forests, Le Particulier offers a small yet enchanting oasis of well-being, just a stone&apos;s throw away from the charming old town of Hazmieh. It&apos;s a place where emotions meet enjoyment, city life harmonizes with quiet moments, and where you can truly unwind.</span>
-
-              <span>We are eagerly awaiting your arrival to share with you our genuine hospitality and provide you with an unforgettable holiday experience - your very own furnished apartment away from home.</span>
+              <span>Elevate your fitness routine in our state-of-the-art gym. Equipped with the latest technology and a range of workout options, our fitness center is designed to cater to all fitness levels. Stay active and energized while enjoying a motivating workout in a modern and invigorating environment.</span>
             </h4>
 
           </div >
@@ -167,20 +151,16 @@ const Gallery = () => {
       {/*Lobby*/}
       <Element name="Lobby">
 
-        <div className=" flex lg:flex-row gap-5 mb-20  flex-col p-2 lg:p-5 h-auto  justify-around items-center ">
+        <div className="flex lg:flex-row gap-5 flex-col p-2 lg:pr-44 lg:pl-44 pt-20 h-auto lg:pb-16 lg:h-auto  justify-around items-center">
           <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
 
             <p className=' lg:text-xl text-xl' >LOBBY</p>
-            <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap' style={{ 'fontFamily': 'Playfair Display', }} >
+            <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap'  >
               A GRAND ENTRANCE THAT SETS THE TONE FOR YOUR LUXURIOUS STAY
             </h1>
 
             <h4 className=' flex flex-col gap-4 lg:text-justify	lg:text-lg text-[14px] mb-2'>
-              <span>Nestled in the vibrant heart of Hazmieh, Lebanon, Le Particulier is more than just a furnished apartment facility; it&apos;s a lively meeting place and a tranquil power spot all rolled into one. Our establishment seamlessly blends history and the promise of the future, cosmopolitan flair with a touch of greenery, and the beating heart with the soothing soul.</span>
-
-              <span>Set amidst picturesque pine trees forests, Le Particulier offers a small yet enchanting oasis of well-being, just a stone&apos;s throw away from the charming old town of Hazmieh. It&apos;s a place where emotions meet enjoyment, city life harmonizes with quiet moments, and where you can truly unwind.</span>
-
-              <span>We are eagerly awaiting your arrival to share with you our genuine hospitality and provide you with an unforgettable holiday experience - your very own furnished apartment away from home.</span>
+              <span>Step into our welcoming lobby, where the journey of comfort and hospitality begins. Designed with a blend of modern elegance and warmth, our lobby is the perfect space to unwind, socialize, or simply enjoy a moment of quiet relaxation. Our attentive staff is ready to ensure your stay starts with a warm welcome. </span>
             </h4>
 
           </div>
@@ -199,11 +179,10 @@ const Gallery = () => {
                 </div>
               ))}
             </Carousel>
-            {/* <img src={LifeStyleImg} className='w-[100%] rounded-sm object-cover' /> */}
           </div>
         </div>
       </Element>
-    </>
+    </div>
 
   )
 }
