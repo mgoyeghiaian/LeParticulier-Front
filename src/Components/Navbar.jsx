@@ -78,9 +78,9 @@ const Navbar = () => {
           >
             {mobileMenuOpen ? (
 
-              <CloseIcon style={{ fontSize: 25, color: 'gray', zIndex: "500" }} />
+              <CloseIcon style={{ fontSize: 25, color: '#E2E2DF', zIndex: "500" }} />
             ) : (
-              <MenuIcon style={{ fontSize: 25, color: 'gray' }} />
+              <MenuIcon style={{ fontSize: 25, color: 'black' }} />
             )}
           </IconButton>
         </div>

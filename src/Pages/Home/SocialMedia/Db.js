@@ -9,7 +9,7 @@ const posts = [
   {
     id: 1,
     imageUrl: image1,
-    description: 'Join us at Particulier as we unveil a new standard of hospitality .',
+    description: 'Join us at Particulier as we unveil a new standard of ...',
     instagramLink: 'https://www.instagram.com/p/CzJVClrM9It/',
   },
   {
@@ -27,19 +27,19 @@ const posts = [
   {
     id: 4,
     imageUrl: image4,
-    description: 'Join us at Particulier as we unveil a new standard of hospitality. ',
+    description: 'Join us at Particulier as we unveil a new standard of ... ',
     instagramLink: 'https://www.instagram.com/p/CzJVClrM9It/',
   },
   {
     id: 5,
     imageUrl: image5,
-    description: 'Join us at Particulier as we unveil a new standard of hospitality.',
+    description: 'Join us at Particulier as we unveil a new standard of ...',
     instagramLink: 'https://www.instagram.com/p/CzJVClrM9It/',
   },
   {
     id: 6,
     imageUrl: image6,
-    description: 'Join us at Particulier as we unveil a new standard of hospitality. ',
+    description: 'Join us at Particulier as we unveil a new standard of ... ',
     instagramLink: 'https://www.instagram.com/p/CzJVClrM9It/',
   },
 ];

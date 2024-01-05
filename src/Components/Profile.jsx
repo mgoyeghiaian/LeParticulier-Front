@@ -57,7 +57,7 @@ export default function Profile() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 25, height: 25, background: "black", cursor: "pointer", display: 'flex', alignItems: 'center', textAlign: 'center', fontSize:'15px' }}>{firstLetter}</Avatar>
+            <Avatar sx={{ width: 25, height: 25, background: "black", cursor: "pointer", display: 'flex', alignItems: 'center', textAlign: 'center', fontSize: '16px', color: 'white', fontWeight: 'bold', justifyContent: 'center', }}>{firstLetter}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -109,6 +109,6 @@ export default function Profile() {
           </span>
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </React.Fragment >
   );
 }

@@ -100,7 +100,7 @@ const Reservation = () => {
       <div className="w-full overflow-x-auto flex flex-wrap">
         {dummyData.map((item) => (
           <div key={item.id} className="lg:w-1/4 md:w-1/2  w-full p-4">
-            <div className="w-full bg-white h-[420px] border rounded-lg overflow-hidden border-slate-200">
+            <div className="w-full bg-white md:h-[420px] border rounded-lg overflow-hidden border-slate-200">
               <img
                 src={item.Thumbnail}
                 alt={item.Name}
