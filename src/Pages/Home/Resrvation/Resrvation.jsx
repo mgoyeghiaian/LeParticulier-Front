@@ -1,49 +1,46 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Button } from '@mui/material';
-import { useState } from 'react';
 import { DateRangePicker } from 'rsuite';
-import 'react-datepicker/dist/react-datepicker.css';
 import 'rsuite/dist/rsuite.css';
 
-import Room1 from '../../../assets/PremiumSeaView/3.jpg';
-import Room2 from '../../../assets/PremiumMountainView/2.jpg';
-import Room3 from '../../../assets/StandardSeaView/1.jpg';
-import Room4 from '../../../assets/StandardMountainView/2.jpg';
+const LoadingSkeleton = () => (
+  <div className="lg:w-1/4 md:w-1/2 w-full p-4">
+    <div className="w-full bg-white md:h-[420px] border rounded-lg overflow-hidden border-slate-200">
+      <div className="w-full h-48 bg-gray-300 animate-pulse"></div>
+      <div className="p-4 flex flex-col justify-around items-center h-[54%]">
+        <div className="h-6 bg-gray-300 w-3/4 mb-2 animate-pulse"></div>
+        <div className="h-16 bg-gray-300 w-full mb-2 animate-pulse"></div>
+        <div className="h-4 bg-gray-300 w-1/2 animate-pulse"></div>
+      </div>
+    </div>
+  </div>
+);
 
-const dummyData = [
-  {
-    id: 1,
-    Thumbnail: Room1,
-    Name: 'Premium Sea View',
-    Disc: "Immerse yourself in luxury with our Premium Sea View room. Enjoy the widest space, a private balcony overlooking the Lebanese coast, and a studio-like feel. Enjoy the extra space, a private balcony with panoramic sea views, and a comfortable living area that seamlessly blends with the stunning surroundings.",
-    price: 100,
-  },
-  {
-    id: 2,
-    Thumbnail: Room3,
-    Name: 'Standard Sea View',
-    Disc: "Upgrade to our Standard Sea View room, featuring extra space and a stunning view of the Lebanese coast. Experience tranquility and coastal charm without leaving your room.",
-    price: 70,
-  },
-  {
-    id: 3,
-    Thumbnail: Room2,
-    Name: 'Premium Mountain View',
-    Disc: "Elevate your stay in our Premium Mountain View room. Experience sophistication with a wider layout, a private balcony, and a small living area. This room is more than just accommodation; it's an immersive experience, it's a suite-like retreat.",
-    price: 90,
-  },
-  {
-    id: 4,
-    Thumbnail: Room4,
-    Name: 'Standard Mountain View',
-    Disc: "Embrace simplicity in our Standard Mountain View room. Enjoy a cozy space with a beautiful view of the Lebanese mountains, providing a serene backdrop for your stay. Unwind in a thoughtfully designed space, where every detail is crafted to ensure a serene stay. ",
-    price: 60,
-  },
-];
 
 const Reservation = () => {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [isDateModalOpen, setDateModalOpen] = useState(false);
+  const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await axios.get('https://leparticulier-backend.onrender.com/rooms');
+        setRooms(response.data);
+        console.log("TEst", response.data)
+      } catch (error) {
+        console.error('Error fetching rooms:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRooms();
+  }, []);
 
   const handleReserveNow = () => {
     setDateModalOpen(true);
@@ -97,24 +94,38 @@ const Reservation = () => {
         )}
       </div>
 
-      <div className="w-full overflow-x-auto flex flex-wrap">
-        {dummyData.map((item) => (
-          <div key={item.id} className="lg:w-1/4 md:w-1/2  w-full p-4">
-            <div className="w-full bg-white md:h-[420px] border rounded-lg overflow-hidden border-slate-200">
-              <img
-                src={item.Thumbnail}
-                alt={item.Name}
-                className="w-full h-48 object-cover object-center"
-              />
-              <div className="p-4 flex flex-col justify-around items-center h-[54%]">
-                <p className="text-lg font-semiboldself-start">{item.Name}</p>
-                <p className="text-sm text-gray-400 font-light">{item.Disc}</p>
-                <p className="text-md self-end justify-self-end text-gray-500">${item.price}</p>
+      {loading ? (
+        <div className="w-full overflow-x-auto flex flex-wrap">
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+        </div>
+      ) : (
+        <div className="w-full overflow-x-auto flex flex-wrap">
+          {rooms.map((item) => {
+            const imageUrls = item.image_urls && JSON.parse(item.image_urls);
+            const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
+
+            return (
+              <div key={item.id} className="lg:w-1/4 md:w-1/2 w-full p-4">
+                <div className="w-full bg-white md:h-[420px] border rounded-lg overflow-hidden border-slate-200">
+                  <img
+                    src={firstImageUrl}
+                    alt={item.room_type}
+                    className="w-full h-48 object-cover object-center "
+                  />
+                  <div className="p-4 flex flex-col justify-around items-center h-[54%]">
+                    <p className="text-lg font-semiboldself-start">{item.room_type}</p>
+                    <p className="text-sm text-gray-400 font-light">{item.description}</p>
+                    <p className="text-md self-end justify-self-end text-gray-500">${item.price}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

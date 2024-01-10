@@ -52,7 +52,7 @@ const Gallery = () => {
       {/* Kidsarea */}
       <Element name="Kidsarea">
         <div>
-          <div className="flex lg:flex-row gap-5 flex-col-reverse lg:pb-20 pt-0 lg:pr-44 lg:pl-44  mt-1 lg:mt-0 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
+          <div className="flex lg:flex-row gap-5 flex-col-reverse lg:pb-20 pt-0 lg:pr-44 lg:pl-44 pb-10  mt-1 lg:mt-0  h-auto lg:mb-0 lg:h-auto  justify-around items-center">
             <div className=' w-[97%] lg:w-[50%]  h-auto border ' >
               <Carousel
                 showStatus={false}
@@ -82,11 +82,11 @@ const Gallery = () => {
           </div>
         </div>
       </Element>
-      {/* Experience */}
+      {/* Cigar */}
 
       <Element name="Cigar">
         <div>
-          <div className=" flex lg:flex-row gap-5 flex-col p-2 lg:pr-44 lg:pl-44 lg:mt-20 h-auto mb-20 lg:h-auto  justify-around items-center">
+          <div className=" flex lg:flex-row gap-5 flex-col p-2 lg:pr-44 lg:pl-44 lg:pb-20  h-auto pb-10 lg:h-auto  justify-around items-center">
             <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
 
               <p className=' lg:text-xl text-xl' >CIGAR LOUNGE</p>
@@ -118,7 +118,7 @@ const Gallery = () => {
 
       {/* Fitness */}
       <Element name="Fitness">
-        <div className="flex lg:flex-row gap-5 flex-col-reverse p-2 lg:pr-44 lg:pl-44 mt-20 mb-20 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
+        <div className="flex lg:flex-row gap-5 flex-col-reverse p-2 lg:pr-44 lg:pl-44 lg:pb-20  pb-10 h-auto lg:mb-0 lg:h-auto  justify-around items-center">
           <div className=' w-[97%] lg:w-[50%]  h-auto border ' >
             <Carousel
               showStatus={false}
@@ -133,7 +133,7 @@ const Gallery = () => {
               ))}
             </Carousel>
           </div>
-          <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
+          <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start flex-wrap w-[97%] lg:w-[50%] gap-5">
 
             <p className=' lg:text-xl text-xl' >GYM</p>
             <h1 className='text-xl lg:text-3xl font-semibold tracking-wider cap'  >
@@ -151,7 +151,7 @@ const Gallery = () => {
       {/*Lobby*/}
       <Element name="Lobby">
 
-        <div className="flex lg:flex-row gap-5 flex-col p-2 lg:pr-44 lg:pl-44 pb-20 lg:pt-20 h-auto lg:pb-16 lg:h-auto  justify-around items-center">
+        <div className="flex lg:flex-row gap-5 flex-col p-2 lg:pr-44 lg:pl-44 pb-24 h-auto lg:h-auto justify-around items-center">
           <div className=" flex flex-col lg:p-4 justify-centers items-center text-center lg:text-left lg:items-start   flex-wrap w-[97%] lg:w-[50%] gap-5">
 
             <p className=' lg:text-xl text-xl' >LOBBY</p>
