@@ -16,7 +16,7 @@ const AboutUS = () => {
           <p className=' lg:text-xl text-xl' >PARTICULER</p>
           <h1 className='text-xl lg:text-3xl text-center font-extrabold tracking-wider'  >WELCOME TO PARTICULER</h1>
           {showFullText ? (
-            <h4 className=' flex flex-col text-justify p-4 gap-4 md:text-justify lg:text-[16px] text-[14px] mb-2'>
+            <h4 className=' flex flex-col text-justify p-4 md:p-0 gap-4 md:text-justify lg:text-[16px] text-[14px] mb-2'>
 
               <span>  Platinum Invest Holding’s latest masterpiece inspired by the exquisite living experience found in boutique hotels.
                 Nestled in the scenic Beit Meri, our project offers a refreshing concept of fully furnished studios and apartments on a wide road with a prime location, providing an unparalleled view of the stunning Lebanese coast.
@@ -39,7 +39,7 @@ const AboutUS = () => {
               </button>
             </h4>
           ) : (
-            <h4 className=' flex flex-col text-justify p-4 gap-4 md:text-justify lg:text-[16px] text-[14px] mb-2'>
+            <h4 className=' flex flex-col text-justify p-4 md:p-0 gap-4 md:text-justify lg:text-[16px] text-[14px] mb-2'>
 
               <span>  Platinum Invest Holding’s latest masterpiece inspired by the exquisite living experience found in boutique hotels.
                 Nestled in the scenic Beit Meri, our project offers a refreshing concept of fully furnished studios and apartments on a wide road with a prime location, providing an unparalleled view of the stunning Lebanese coast.
