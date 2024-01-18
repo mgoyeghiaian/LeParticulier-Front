@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import GalleryCarousel from '../../../Components/GalleryCarousel/GalleryCarousel'
-import Img from '../../../assets/About UsRImage2.jpg'
+import Img from '/src/assets/AboutUsRImage3.jpg'
 
 const AboutUS = () => {
   const [showFullText, setShowFullText] = useState(false);
@@ -17,7 +17,6 @@ const AboutUS = () => {
           <h1 className='text-xl lg:text-3xl text-center font-extrabold tracking-wider'  >WELCOME TO PARTICULER</h1>
           {showFullText ? (
             <h4 className=' flex flex-col text-justify p-4 md:p-0 gap-4 md:text-justify lg:text-[16px] text-[14px] mb-2'>
-
               <span>  Platinum Invest Holding’s latest masterpiece inspired by the exquisite living experience found in boutique hotels.
                 Nestled in the scenic Beit Meri, our project offers a refreshing concept of fully furnished studios and apartments on a wide road with a prime location, providing an unparalleled view of the stunning Lebanese coast.
                 At Particulier, immerse yourself in the hotel-caliber lifestyle, where each apartment is meticulously designed, decorated, and fully furnished, ensuring a heightened attention to every detail.</span>
@@ -44,7 +43,6 @@ const AboutUS = () => {
               <span>  Platinum Invest Holding’s latest masterpiece inspired by the exquisite living experience found in boutique hotels.
                 Nestled in the scenic Beit Meri, our project offers a refreshing concept of fully furnished studios and apartments on a wide road with a prime location, providing an unparalleled view of the stunning Lebanese coast.
                 At Particulier, immerse yourself in the hotel-caliber lifestyle, where each apartment is meticulously designed, decorated, and fully furnished, ensuring a heightened attention to every detail.  </span>
-
               <button onClick={handleShowMore} className="text-gray-400 text-right hover:text-black text-[13px] cursor-pointer focus:outline-none">
                 {showFullText ? 'Show Less' : 'Read More...'}
               </button>
@@ -59,7 +57,6 @@ const AboutUS = () => {
               YOUR FASTEST WAY TO US
             </a>
           </div>
-
         </div>
         <div className='w-[97%] lg:w-[50%]  h-auto border ' >
           <img src={Img} className='w-[100%] rounded-sm object-cover' />
