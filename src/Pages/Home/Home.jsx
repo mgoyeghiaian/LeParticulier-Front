@@ -20,7 +20,7 @@ const Home = () => {
   }, [location.hash]);
 
   return (
-    <div className="bg-[#E5E1DA]">
+    <div>
       <Hero />
       <Element name="aboutUs">
         <AboutUS />

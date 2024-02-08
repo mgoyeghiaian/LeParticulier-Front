@@ -48,7 +48,7 @@ const Login = () => {
     } catch (error) {
       setError(error.response.data.Error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 

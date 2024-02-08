@@ -8,6 +8,7 @@ import Signup from "./Pages/login-signup/Signup"
 import ResetPassword from "./Pages/ResetPassword/ResetPassword"
 import ResetRequest from "./Pages/ResetPassword/ResetRequest"
 import ProfileEdit from "./Pages/Profile/ProfileEdit"
+import DateRange from "./Components/DateRange/DateRange"
 
 const SharedRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const SharedRoutes = () => {
       <Route path="/profile" element={<ProfileEdit />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/dateRange" element={<DateRange />} />
 
     </Routes>
   )

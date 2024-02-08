@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ThreeDots } from 'react-loader-spinner';
+import ResrvationInfo from './ResrvationInfo';
 
 const ProfileEdit = () => {
   const UserData = JSON.parse(localStorage.getItem('userData'))
@@ -39,7 +40,6 @@ const ProfileEdit = () => {
 
     try {
       setLoading(true);
-
       const response = await axios.put(`https://leparticulier-backend.onrender.com/update/${userId}`, {
         firstname: firstname,
         lastname: lastname,
@@ -76,7 +76,7 @@ const ProfileEdit = () => {
       </h1>
       <Container maxWidth="md"
       >
-        <Paper elevation={1} style={{ padding: '25px', marginTop: '24px', background: '#E5E1DA' }}>
+        <Paper elevation={1} style={{ padding: '25px', marginTop: '24px', background: '#FFFFFF' }}>
 
           <form onSubmit={handleSubmit} className="space-y-2  flex flex-col gap-2">
             <Grid container spacing={2} >
@@ -189,8 +189,9 @@ const ProfileEdit = () => {
       <div className='flex border  mt-2 p-1 rounded-md items-end justify-end'>
         <a onClick={handleLogout} className=' cursor-pointer text-gray-600 font-semibold hover:text-gray-500 '>Reset Password</a>
       </div>
-    </div >
+      <ResrvationInfo />
 
+    </div >
   );
 };
 
