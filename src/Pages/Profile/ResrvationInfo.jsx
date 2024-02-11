@@ -3,13 +3,15 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { Container, Paper, Modal, Button } from '@mui/material';
+import { Container, Paper, Modal, Button, CircularProgress } from '@mui/material';
 
 const ReservationInfo = () => {
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [cancelConfirmationOpen, setCancelConfirmationOpen] = useState(false);
   const [reservationToCancel, setReservationToCancel] = useState(null);
+  const [cancelLoading, setCancelLoading] = useState(false);
+
   const UserData = JSON.parse(localStorage.getItem('userData'));
   const userId = UserData.id;
 
@@ -37,8 +39,10 @@ const ReservationInfo = () => {
     setCancelConfirmationOpen(false);
   };
 
-  const cancelReservation = () => {
-    axios
+  const cancelReservation = async () => {
+    setCancelLoading(true);
+
+    await axios
       .put(`https://leparticulier-backend.onrender.com/cancelReservation/${reservationToCancel}`)
       .then((response) => {
         setReservations((prevReservations) =>
@@ -53,20 +57,34 @@ const ReservationInfo = () => {
           hideProgressBar: true,
         });
         closeCancelConfirmation();
+        setCancelLoading(false);
       })
       .catch((error) => {
         console.error('Error canceling reservation:', error);
+        console.log(error);
+        setCancelLoading(false);
+
       });
   };
 
-  // Filter reservations based on the conditions
+  const isDatePast = (endDate) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const end = new Date(endDate);
+    return end < today;
+  };
+
   const upcomingReservations = reservations.filter(
-    (reservation) => reservation.processed === 0 && reservation.is_canceled === 0
+    (reservation) => reservation.is_canceled === 0 && !isDatePast(reservation.end_date)
   );
   const pastReservations = reservations.filter(
-    (reservation) => reservation.processed === 1 && reservation.is_canceled === 0
+    (reservation) => reservation.is_canceled === 0 && isDatePast(reservation.end_date)
   );
   const canceledReservations = reservations.filter((reservation) => reservation.is_canceled === 1);
+  // console.log("Upcoming", upcomingReservations)
+  // console.log("Past", pastReservations)
+  // console.log("Canceled", canceledReservations)
+
 
   return (
     <>
@@ -102,7 +120,7 @@ const ReservationInfo = () => {
                     const imageUrls = item.image_urls && JSON.parse(item.image_urls);
                     const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
                     return (
-                      <div key={item.room_id} className="w-full ">
+                      <div key={item.reservation_id} className="w-full ">
                         <div className="w-full bg-white md:h-auto border rounded-lg overflow-hidden relative">
                           <div className="relative">
                             <img
@@ -120,7 +138,7 @@ const ReservationInfo = () => {
                             </p>
                           </div>
                           <div className='pt-2 p-4'>
-                            {item.processed === 0 && item.is_canceled === 0 && (
+                            {item.is_canceled === 0 && (
                               <button className="bg-red-500 hover:bg-red-400 text-white text-[11px] px-3 py-2 rounded" onClick={() => openCancelConfirmation(item.reservation_id)}>Cancel Reservation</button>
                             )}
                           </div>
@@ -164,7 +182,7 @@ const ReservationInfo = () => {
                     const imageUrls = item.image_urls && JSON.parse(item.image_urls);
                     const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
                     return (
-                      <div key={item.room_id} className="w-full ">
+                      <div key={item.reservation_id} className="w-full ">
                         <div className="w-full bg-white md:h-auto border rounded-lg overflow-hidden relative">
                           <div className="relative">
                             <img
@@ -221,7 +239,7 @@ const ReservationInfo = () => {
                     const imageUrls = item.image_urls && JSON.parse(item.image_urls);
                     const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
                     return (
-                      <div key={item.room_id} className="w-full ">
+                      <div key={item.reservation_id} className="w-full ">
                         <div className="w-full bg-white md:h-auto border rounded-lg overflow-hidden relative">
                           <div className="relative">
                             <img
@@ -266,7 +284,15 @@ const ReservationInfo = () => {
           <Paper elevation={3} className='p-6 flex flex-col justify-center items-center self-center justify-self-center'>
             <h2 id="cancel-confirmation-modal" className='text-center'>Are you sure you want to cancel the reservation?</h2>
             <div className=' flex p-2 pt-3 gap-5' >
-              <Button variant="contained" color='error' onClick={cancelReservation}>Yes</Button>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={cancelReservation}
+                disabled={cancelLoading} // Disable the button while loading
+                startIcon={cancelLoading && <CircularProgress size={24} color="inherit" />}
+              >
+                Yes
+              </Button>
               <Button variant="contained" onClick={closeCancelConfirmation}>No</Button>
             </div>
           </Paper>

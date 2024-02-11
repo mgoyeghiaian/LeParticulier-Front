@@ -31,6 +31,8 @@ const Reservation = () => {
   const endDateRef = useRef(null);
 
   const navigate = useNavigate();
+  // console.log(selectedStartDate)
+  // console.log(selectedEndDate)
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -61,8 +63,13 @@ const Reservation = () => {
       setDateValidationError('');
 
       if (selectedStartDate && selectedEndDate) {
-        const formattedStartDate = selectedStartDate.toISOString().split('T')[0];
-        const formattedEndDate = selectedEndDate.toISOString().split('T')[0];
+        // Adjust the start and end dates for the local time zone before formatting
+        const timezoneOffset = new Date().getTimezoneOffset() * 60000; // Convert offset to milliseconds
+        const localStartDate = new Date(selectedStartDate.getTime() - timezoneOffset);
+        const localEndDate = new Date(selectedEndDate.getTime() - timezoneOffset);
+
+        const formattedStartDate = localStartDate.toISOString().split('T')[0];
+        const formattedEndDate = localEndDate.toISOString().split('T')[0];
 
         const startDate = new Date(selectedStartDate);
         const endDate = new Date(selectedEndDate);
@@ -71,21 +78,19 @@ const Reservation = () => {
         localStorage.setItem('selectedNumberOfDays', numberOfDays);
 
         setLoading(true);
-        setShowRoomsLoading(true)
+        setShowRoomsLoading(true);
 
         const response = await axios.post('https://leparticulier-backend.onrender.com/available-rooms', {
           start_date: formattedStartDate,
           end_date: formattedEndDate,
         });
 
-        console.log('Available Rooms:', response.data);
-
         navigate('/reservation', {
           state: {
             roomsData: response.data,
             StartDate: formattedStartDate,
-            EndDate: formattedEndDate
-          }
+            EndDate: formattedEndDate,
+          },
         });
       } else {
         setDateValidationError('Please select both start and end dates');
@@ -95,11 +100,11 @@ const Reservation = () => {
     } finally {
       setLoading(false);
       setShowRoomsLoading(false);
-
     }
 
     handleModalClose();
   };
+
 
   const handleClearReservation = () => {
     setSelectedStartDate(null);
@@ -236,9 +241,10 @@ const Reservation = () => {
                     className="w-full h-48 object-cover object-center "
                   />
                   <div className="p-4 flex flex-col justify-around items-center h-[54%]">
-                    <p className="text-lg font-semiboldself-start">{item.room_type}</p>
-                    <p className="text-sm text-gray-400 font-light">{item.description}</p>
-                    <p className="text-md self-end justify-self-end text-gray-500">${item.price}</p>
+                    <p className="text-lg font-semibold self-start">{item.room_type}</p>
+                    <p className="text-sm text-gray-400 font-light">
+                      {item.description}</p>
+                    <p className="text-md self-end justify-self-end text-gray-500 font-bold ">${item.price}</p>
                   </div>
                 </div>
               </div>

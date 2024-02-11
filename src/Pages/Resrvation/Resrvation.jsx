@@ -7,6 +7,7 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import { Skeleton } from '@mui/material';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { ThreeDots } from 'react-loader-spinner';
 
 // import Link from 'react-router-dom';
 const Reservation = () => {
@@ -22,15 +23,18 @@ const Reservation = () => {
   const [selectedRoomId, setSelectedRoomId] = useState(null);
   const [loader, setLoader] = useState(false);
   const userData = JSON.parse(localStorage.getItem('userData'));
+  const [roomLoading, setRoomLoading] = useState({});
+  // const [roomisLoadingTest, setRoomLoadingTest] = useState(true);
 
+  // console.log("Resrvation Page startDate", startDate)
+  // console.log("Resrvation Page endDate", endDate)
 
   const handleReserveClick = async (roomId, totalPrice) => {
     const userId = userData ? userData.id : localStorage.getItem('id');
-    // console.log("Reserve clicked for uSER ID:", userId);
-    // console.log("Reserve clicked for room ID:", roomId);
-    // console.log("Reserve clicked for StartDate:", startDate);
-    // console.log("Reserve clicked for StartDate:", endDate);
-    // console.log("Reserve clicked for totalPrice:", totalPrice);
+    setRoomLoading((prevLoading) => ({
+      ...prevLoading,
+      [roomId]: true,
+    }));
 
     try {
       const response = await axios.post(`https://leparticulier-backend.onrender.com/reserve-room`, {
@@ -47,10 +51,16 @@ const Reservation = () => {
         });
         setTimeout(() => {
           navigate("/profile");
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      // Reset loading state for the clicked room
+      setRoomLoading((prevLoading) => ({
+        ...prevLoading,
+        [roomId]: false,
+      }));
     }
   };
 
@@ -230,15 +240,23 @@ const Reservation = () => {
                       {showMoreMap[item.room_id] ? 'Read Less' : 'Read More'}
                     </button>
                   )}
-                  <div className="flex flex-col md:flex-row justify-between items-start pt-3">
+                  <div className="flex flex-row  items-center md:gap-5 gap-10 pt-3 w-[100%]">
                     {userData ? (
-                      <button
-                        className="border text-[10px] border-[#9e9898] text-black hover:bg-gray-300 bg-opacity-50 p-2 rounded text-center hover:bg-opacity-100 transition duration-300 cursor-pointer hover:no-underline hover:text-gray-600 mb-2 md:mb-0"
-                        onClick={() => handleReserveClick(item.room_id, totalPrice)}
-
-                      >
-                        Reserve Now
-                      </button>
+                      <>
+                        {roomLoading[item.room_id] ? (
+                          <div className=' w-[100px] flex  p-2  justify-center'>
+                            <ThreeDots color="grey" width={70} height={60} ariaLabel="line-wave-loading"
+                            />
+                          </div>
+                        ) : (
+                          <button
+                            className="border text-[10px] border-[#9e9898] text-black hover:bg-gray-300 bg-opacity-50 p-2 rounded text-center hover:bg-opacity-100 transition duration-300 cursor-pointer hover:no-underline hover:text-gray-600 mb-2 md:mb-0"
+                            onClick={() => handleReserveClick(item.room_id, totalPrice)}
+                          >
+                            Reserve Now
+                          </button>
+                        )}
+                      </>
                     ) : (
 
                       <p className="text-[12px] text-gray-500 ">
@@ -249,9 +267,9 @@ const Reservation = () => {
                       </p>
 
                     )}
-                    <div className="text-[12px] self-end text-gray-500 font-bold md:ml-20 flex  ">
+                    <div className="text-[12px]  inline text-gray-500 font-bold md:ml-20   ">
                       Total for {selectedNumberOfDays} days:
-                      <span className='ml-1 block self-end'> ${totalPrice}</span>
+                      <span > ${totalPrice}</span>
                     </div>
                   </div>
                 </div>
