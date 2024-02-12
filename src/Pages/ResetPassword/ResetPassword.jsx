@@ -129,11 +129,11 @@ const ResetPassword = () => {
                 />
               </div>
             ) : (
-            <Button type="submit" variant="contained" color="primary" fullWidth
-              sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
-            >
-              Reset Password
-            </Button>
+              <Button type="submit" variant="contained" color="primary" fullWidth
+                sx={{ backgroundColor: 'gray', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }}
+              >
+                Reset Password
+              </Button>
             )}
 
           </form>

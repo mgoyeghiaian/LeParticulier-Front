@@ -29,8 +29,12 @@ const Reservation = () => {
   // console.log("Resrvation Page startDate", startDate)
   // console.log("Resrvation Page endDate", endDate)
 
-  const handleReserveClick = async (roomId, totalPrice) => {
+  const handleReserveClick = async (roomId, price) => {
     const userId = userData ? userData.id : localStorage.getItem('id');
+    const email = userData ? userData.email : localStorage.getItem('email');
+    const phonenumber = userData ? userData.phonenumber : localStorage.getItem('phonenumber');
+    const name = userData ? userData.firstname : localStorage.getItem('firstname');
+
     setRoomLoading((prevLoading) => ({
       ...prevLoading,
       [roomId]: true,
@@ -42,7 +46,11 @@ const Reservation = () => {
         room_id: roomId,
         start_date: startDate,
         end_date: endDate,
-        final_price: totalPrice
+        final_price: price,
+        phone_number: phonenumber,
+        email: email,
+        name: name,
+
       });
 
       if (response.status === 200) {
@@ -142,7 +150,6 @@ const Reservation = () => {
       original: url,
       thumbnail: url,
     }));
-
     return (
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50">
         <div className="relative max-w-screen-md p-2 max-h-screen-3/4 overflow-hidden ">
@@ -186,6 +193,7 @@ const Reservation = () => {
           const imageUrls = item.image_urls && JSON.parse(item.image_urls);
           const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
           const totalPrice = selectedNumberOfDays * item.price;
+          const price = item.price
 
           return (
             <div key={item.room_id} className="lg:w-1/4 md:w-1/2 w-full p-4">
@@ -251,7 +259,7 @@ const Reservation = () => {
                         ) : (
                           <button
                             className="border text-[10px] border-[#9e9898] text-black hover:bg-gray-300 bg-opacity-50 p-2 rounded text-center hover:bg-opacity-100 transition duration-300 cursor-pointer hover:no-underline hover:text-gray-600 mb-2 md:mb-0"
-                            onClick={() => handleReserveClick(item.room_id, totalPrice)}
+                            onClick={() => handleReserveClick(item.room_id, price)}
                           >
                             Reserve Now
                           </button>
