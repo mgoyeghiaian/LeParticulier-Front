@@ -120,34 +120,44 @@ const ReservationInfo = () => {
                     const imageUrls = item.image_urls && JSON.parse(item.image_urls);
                     const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
                     return (
-                      <div key={item.reservation_id} className="w-full ">
-                        <div className="w-full bg-white md:h-auto border rounded-lg overflow-hidden relative">
+                      <div key={item.reservation_id} className="w-full">
+                        <div className="w-full bg-white md:h-auto border rounded-lg overflow-hidden shadow-lg relative">
                           <div className="relative">
                             <img
                               src={firstImageUrl}
                               alt={item.room_type}
-                              className="w-full h-48 object-cover object-center "
+                              className="w-full h-48 object-cover object-center transition duration-500 ease-in-out transform hover:scale-105"
                             />
                           </div>
-                          <div className="p-4 pb-1 flex flex-row justify-between items-center gap-2">
-                            <p className="text-sm inline font-semibold self-start">{item.room_type}</p>
+                          <div className="px-6 py-4 flex justify-between items-center gap-2">
+                            <p className="text-lg font-semibold">{item.room_type}</p>
                           </div>
-                          <div className="p-4 pt-1 flex flex-row justify-between items-center gap-2">
-                            <p className="text-sm text-gray-400 font-light">
+                          <div className="px-6 py-2 flex justify-between items-center gap-2">
+                            <p className="text-md text-gray-500">
                               {item.description}
                             </p>
                           </div>
-                          <div className='pt-2 p-4'>
+                          <div className="py-4 px-6">
                             {item.is_canceled === 0 && (
-                              <button className="bg-red-500 hover:bg-red-400 text-white text-[11px] px-3 py-2 rounded" onClick={() => openCancelConfirmation(item.reservation_id)}>Cancel Reservation</button>
+                              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow" onClick={() => openCancelConfirmation(item.reservation_id)}>Cancel Reservation</button>
                             )}
                           </div>
-                          <div className="text-[12px] text-gray-600 bg-gray-100 w-full font-bold justify-between p-4 pt-2 pb-2 items-center flex-row flex">
-                            <span className='self-start'> From {startDate} to  {endDate}</span>
-                            <span className='self-end'> Total: ${item.final_price}</span>
+                          <div className="text-sm bg-gray-100 w-full font-semibold justify-between px-6 py-3 items-center flex-row flex">
+                            <span>From {startDate} to {endDate}</span>
+                            <span>Total: ${item.final_price}</span>
+                          </div>
+                          <div className='w-full bg-gray-50 border-t border-gray-200 px-6 py-4'>
+                            <h1 className='text-xl font-bold text-gray-800 mb-3'>Payment Options:</h1>
+                            <ul className='list-disc space-y-3 pl-5 font-semibold text-[13px] text-gray-400'>
+                              <li>OMT Transfer: Visit any OMT branch and transfer the amount to the number below: 961 3785866</li>
+                              <li>Whish Money Transfer: Make a transfer through Whish Money to the number below: ensure 961 3785866</li>
+                              <li>In-Person Payment: You can settle the payment at the front desk of our location in Beit Meri within the next 2 days.</li>
+                            </ul>
                           </div>
                         </div>
                       </div>
+
+
                     )
                   })}
                 </div>
