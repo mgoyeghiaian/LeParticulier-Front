@@ -16,7 +16,7 @@ const ResetRequest = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post(`https://leparticulier-backend.onrender.com/request-reset-password`, {
+      const response = await axios.post(`  http://localhost:8081/request-reset-password`, {
         email,
       });
       if (response.status === 200) {

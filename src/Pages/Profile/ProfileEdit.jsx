@@ -40,7 +40,7 @@ const ProfileEdit = () => {
 
     try {
       setLoading(true);
-      const response = await axios.put(`https://leparticulier-backend.onrender.com/update/${userId}`, {
+      const response = await axios.put(`  http://localhost:8081/update/${userId}`, {
         firstname: firstname,
         lastname: lastname,
         email: email,

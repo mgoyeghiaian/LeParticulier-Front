@@ -29,7 +29,6 @@ const Reservation = () => {
   const [showRoomsLoading, setShowRoomsLoading] = useState(false);
 
   const endDateRef = useRef(null);
-
   const navigate = useNavigate();
   // console.log(selectedStartDate)
   // console.log(selectedEndDate)
@@ -38,7 +37,7 @@ const Reservation = () => {
     const fetchRooms = async () => {
       try {
         setShowRoomsLoading(true)
-        const response = await axios.get('https://leparticulier-backend.onrender.com/rooms');
+        const response = await axios.get('  http://localhost:8081/rooms');
         setRooms(response.data);
       } catch (error) {
         console.error('Error fetching rooms:', error);
@@ -63,8 +62,7 @@ const Reservation = () => {
       setDateValidationError('');
 
       if (selectedStartDate && selectedEndDate) {
-        // Adjust the start and end dates for the local time zone before formatting
-        const timezoneOffset = new Date().getTimezoneOffset() * 60000; // Convert offset to milliseconds
+        const timezoneOffset = new Date().getTimezoneOffset() * 60000;
         const localStartDate = new Date(selectedStartDate.getTime() - timezoneOffset);
         const localEndDate = new Date(selectedEndDate.getTime() - timezoneOffset);
 
@@ -80,7 +78,7 @@ const Reservation = () => {
         setLoading(true);
         setShowRoomsLoading(true);
 
-        const response = await axios.post('https://leparticulier-backend.onrender.com/available-rooms', {
+        const response = await axios.post('  http://localhost:8081/available-rooms', {
           start_date: formattedStartDate,
           end_date: formattedEndDate,
         });
@@ -123,7 +121,15 @@ const Reservation = () => {
     }
   };
 
-
+  const toggleDescription = (roomId) => {
+    setRooms(currentRooms =>
+      currentRooms.map(room =>
+        room.room_id === roomId
+          ? { ...room, isDescriptionExpanded: !room.isDescriptionExpanded }
+          : room
+      )
+    );
+  };
 
 
   const isShowRoomsButtonDisabled = !selectedStartDate || !selectedEndDate;
@@ -147,7 +153,6 @@ const Reservation = () => {
         </div>
 
         {isDateModalOpen ? (
-
           <div className='w-[98%] h-auto flex mt-6 justify-start items-center flex-col gap-2 rounded-lg border p-4 border-gray-400 bg-white'>
             <button onClick={handleModalClose} className='bg-black self-end text-white p-1 flex items-center justify-center rounded-full cursor-pointer'>
               <Close />
@@ -232,27 +237,38 @@ const Reservation = () => {
           {rooms.map((item) => {
             const imageUrls = item.image_urls && JSON.parse(item.image_urls);
             const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
+            const description = item.description;
+            const shouldTruncate = description.length > 100 && !item.isDescriptionExpanded;
+            const displayDescription = shouldTruncate ? `${description.substring(0, 100)}...` : description;
+
             return (
               <div key={item.room_id} className="lg:w-1/4 md:w-1/2 w-full p-4">
-                <div className="w-full bg-white md:h-[420px] border rounded-lg overflow-hidden border-slate-200">
+                <div className="w-full bg-white  border rounded-lg overflow-hidden border-slate-200">
                   <img
                     src={firstImageUrl}
                     alt={item.room_type}
-                    className="w-full h-48 object-cover object-center "
+                    className="w-full h-48 object-cover object-center"
                   />
-                  <div className="p-4 flex flex-col justify-around items-center h-[54%]">
+                  <div className="p-4 flex flex-col gap-6 justify-between h-[54%]">
                     <p className="text-lg font-semibold self-start">{item.room_type}</p>
                     <p className="text-sm text-gray-400 font-light">
-                      {item.description}</p>
-                    <p className="text-md self-end justify-self-end text-gray-500 font-bold ">${item.price}</p>
+                      {displayDescription}
+                      {description.length > 100 && (
+                        <button onClick={() => toggleDescription(item.room_id)} className="text-gray-400 block  mt-2 hover:text-black text-[13px] cursor-pointer focus:outline-none">
+                          {item.isDescriptionExpanded ? 'Show Less' : 'Read More...'}
+                        </button>
+                      )}
+                    </p>
+                    <p className="text-md self-end justify-self-end text-gray-500 font-bold">${item.price}</p>
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
