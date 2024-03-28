@@ -4,8 +4,11 @@ import { toast } from 'react-toastify';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { Container, Paper, Modal, Button, CircularProgress } from '@mui/material';
-
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 const ReservationInfo = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [cancelConfirmationOpen, setCancelConfirmationOpen] = useState(false);
@@ -92,8 +95,13 @@ const ReservationInfo = () => {
       <h1 className="text-3xl font-extrabold text-gray-800 uppercase mt-16">
         <span className="text-xl lg:text-3xl font-semibold tracking-wider text-gray-500 ">Reservations</span>
       </h1>
-      <Container maxWidth="md">
-        <Paper elevation={1} style={{ padding: '25px', marginTop: '24px', background: '#FFFFFF', width: '100%' }}>
+      <Container maxWidth="md" style={{ paddingLeft: isMobile && 0, paddingRight: isMobile && 0 }}>
+        <Paper elevation={1} style={{
+          padding: isMobile ? '5px' : '25px',
+          marginTop: '24px',
+          background: '#FFFFFF',
+          width: '100%'
+        }}>
           <h2 className="text-2xl font-bold mt-4 mb-4">Upcoming Reservations</h2>
           {isLoading ? (
             <div className='w-full'>
@@ -104,7 +112,7 @@ const ReservationInfo = () => {
               {upcomingReservations.length === 0 ? (
                 <p>No Upcoming Reservations.</p>
               ) : (
-                <div className='p-5 flex justify-around items-center flex-wrap gap-10'>
+                <div className=' p-0 md:p-5 flex justify-around items-center flex-wrap gap-10'>
                   {upcomingReservations.map((item) => {
                     const startDate = formatDate(item.start_date);
                     const endDate = formatDate(item.end_date);
@@ -176,7 +184,7 @@ const ReservationInfo = () => {
               {pastReservations.length === 0 ? (
                 <p>No Past reservations.</p>
               ) : (
-                <div className='p-5 flex justify-around items-center flex-wrap gap-10'>
+                <div className='p-0 md:p-5  flex justify-around items-center flex-wrap gap-10'>
                   {pastReservations.map((item) => {
                     const startDate = formatDate(item.start_date);
                     const endDate = formatDate(item.end_date);
@@ -223,7 +231,7 @@ const ReservationInfo = () => {
           )}
 
           {/* Canceled Reservations */}
-          <h2 className="text-2xl font-bold mt-4 mb-4 ">Canceled Reservations</h2>
+          <h2 className="text-2xl font-bold mt-4 mb-4">Canceled Reservations</h2>
           {isLoading ? (
             <div className='w-full'>
               <Skeleton height={250} width='100%' count={1} />
@@ -233,7 +241,7 @@ const ReservationInfo = () => {
               {canceledReservations.length === 0 ? (
                 <p>No Canceled Reservations.</p>
               ) : (
-                <div className='p-5 flex justify-around items-center flex-wrap gap-10'>
+                <div className='p-0 md:p-5 flex justify-around items-center flex-wrap gap-10'>
                   {canceledReservations.map((item) => {
                     const startDate = formatDate(item.start_date);
                     const endDate = formatDate(item.end_date);

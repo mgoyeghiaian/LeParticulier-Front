@@ -70,7 +70,7 @@ const ProfileEdit = () => {
 
 
   return (
-    <div className='h-[100%] p-[5%] flex items-center justify-center bg-[#ece8e0] flex-col'>
+    <div className='h-[100%] md:p-[5%] flex items-center justify-center bg-[#ece8e0] flex-col'>
       <h1 className="text-3xl font-extrabold text-gray-800 uppercase mb-4">
         <span className="text-xl lg:text-3xl text-center font-semibold tracking-wider text-gray-500 "> Edit Profile </span>
       </h1>

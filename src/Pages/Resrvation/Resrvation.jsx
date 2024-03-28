@@ -8,8 +8,8 @@ import { Skeleton } from '@mui/material';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
+import moment from 'moment';
 
-// import Link from 'react-router-dom';
 const Reservation = () => {
   const location = useLocation();
   const roomsData = useMemo(() => location.state ? location.state.roomsData : [], [location.state]);
@@ -24,17 +24,23 @@ const Reservation = () => {
   const [loader, setLoader] = useState(false);
   const userData = JSON.parse(localStorage.getItem('userData'));
   const [roomLoading, setRoomLoading] = useState({});
-  // const [roomisLoadingTest, setRoomLoadingTest] = useState(true);
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
+  const [reservationDetails, setReservationDetails] = useState({});
 
-  // console.log("Resrvation Page startDate", startDate)
-  // console.log("Resrvation Page endDate", endDate)
+  const calculateNumberOfDays = (startDate, endDate) => {
+    const duration = moment.duration(moment(endDate).diff(moment(startDate)));
+    const numberOfDays = duration.asDays();
+    return Math.ceil(numberOfDays);
+  };
+
+
+
 
   const handleReserveClick = async (roomId, price) => {
     const userId = userData ? userData.id : localStorage.getItem('id');
     const email = userData ? userData.email : localStorage.getItem('email');
     const phonenumber = userData ? userData.phonenumber : localStorage.getItem('phonenumber');
     const name = userData ? userData.firstname : localStorage.getItem('firstname');
-
     setRoomLoading((prevLoading) => ({
       ...prevLoading,
       [roomId]: true,
@@ -57,14 +63,22 @@ const Reservation = () => {
         toast.success(response.data.message, {
           hideProgressBar: true,
         });
-        setTimeout(() => {
-          navigate("/profile");
-        }, 1000);
+        setReservationDetails({
+          startDate: startDate,
+          name: name,
+          email: email,
+          endDate: endDate,
+          totalPrice: price,
+          phoneNumber: phonenumber,
+          roomType: roomsData.find((room) => room.room_id === roomId).room_type,
+          numberOfDays: calculateNumberOfDays(startDate, endDate),
+        });
+        setConfirmationModalOpen(true);
+
       }
     } catch (error) {
       console.log(error);
     } finally {
-      // Reset loading state for the clicked room
       setRoomLoading((prevLoading) => ({
         ...prevLoading,
         [roomId]: false,
@@ -90,10 +104,6 @@ const Reservation = () => {
     setGalleryOpen(false);
   };
 
-
-
-
-
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -106,16 +116,6 @@ const Reservation = () => {
       closeGallery();
     }
   };
-  // const formatDate = (dateString) => {
-  //   if (!dateString) return '';
-
-  //   const dateArray = dateString.split('-');
-
-  //   const formattedDateArray = [dateArray[2], dateArray[1], dateArray[0]];
-
-  //   return formattedDateArray.join(' / ');
-  // };
-
 
   useEffect(() => {
     const fetchAmenities = async (roomId) => {
@@ -141,7 +141,6 @@ const Reservation = () => {
       fetchAmenities(room.room_id);
     });
   }, [roomsData]);
-
 
   const renderGallery = () => {
     const selectedRoom = roomsData.find((room) => room.room_id === selectedRoomId);
@@ -172,6 +171,61 @@ const Reservation = () => {
     );
   };
 
+  const ReservationConfirmationModal = () => {
+    return (
+      confirmationModalOpen && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center z-50 px-2 lg:px-0">
+          <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl w-full max-w-3xl md:max-w-none md:h-[95%]  md:w-[100%] lg:w-[50%] mx-auto md:max-h-none max-h-[90vh] overflow-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800">Reservation Confirmation</h2>
+            <div className="mt-4 text-gray-600">
+              <p>Dear <span className="font-semibold text-gray-800">{reservationDetails.name}</span>,</p>
+              <p className="mt-2">Thank you for choosing our service. We are pleased to confirm your reservation with the following details:</p>
+            </div>
+            <ul className="mt-4 space-y-2 pl-4 list-inside">
+              <li className="text-sm sm:text-md md:text-lg">Start Date: <span className="font-semibold">{reservationDetails.startDate}</span></li>
+              <li className="text-sm sm:text-md md:text-lg">End Date: <span className="font-semibold">{reservationDetails.endDate}</span></li>
+              <li className="text-sm sm:text-md md:text-lg">Room Type: <span className="font-semibold">{reservationDetails.roomType}</span></li>
+              <li className="text-sm sm:text-md md:text-lg">Number of Days: <span className="font-semibold">{reservationDetails.numberOfDays}</span></li>
+              <li className="text-sm sm:text-md md:text-lg">Total Price for {reservationDetails.numberOfDays} days: <span className="font-semibold">${reservationDetails.totalPrice}</span></li>
+              <li className="text-sm sm:text-md md:text-lg">Phone Number: <span className="font-semibold">{reservationDetails.phoneNumber}</span></li>
+            </ul>
+            <div className="mt-6 border-t border-gray-300 pt-4">
+              <h1 className='text-md sm:text-lg md:text-xl font-bold text-gray-800'>Reservation Confirmation and Payment Instructions:</h1>
+              <p className="mt-2 text-sm sm:text-md md:text-lg">Thank you for choosing Particulier Serviced Apartments in Beit Meri! Your reservation has been confirmed. To secure your booking, please follow the payment instructions below:</p>
+            </div>
+            <div className='mt-4'>
+              <h1 className='text-md sm:text-lg md:text-xl font-bold text-gray-800 mb-3'>Payment Options:</h1>
+              <ul className='list-disc space-y-2 pl-5 text-sm sm:text-md md:text-lg font-medium text-gray-600'>
+                <li>OMT Transfer: Visit any OMT branch and transfer the amount to the number below: 961 3785866</li>
+                <li>Whish Money Transfer: Make a transfer through Whish Money to the number below: ensure 961 3785866</li>
+                <li>In-Person Payment: You can settle the payment at the front desk of our location in Beit Meri within the next 2 days.</li>
+              </ul>
+            </div>
+            <div className="mt-4 text-sm sm:text-md md:text-lg text-gray-600">
+              <p>Check your email: <span className="font-bold text-gray-800">{reservationDetails.email}</span> for full information.</p>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                className="px-5 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg bg-blue-600 text-white font-semibold leading-snug uppercase rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                onClick={() => {
+                  setConfirmationModalOpen(false);
+                  navigate("/profile");
+                }}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+
+      )
+    );
+  };
+
+
+
+
+
   return (
     <div className="container mx-auto mt-10">
       <div className='flex flex-col justify-center items-center md:items-start '>
@@ -179,14 +233,6 @@ const Reservation = () => {
         <a href="/" className="text-md font-bold flex justify-start items-center text-[#000000a9] hover:text-black">
           <ArrowBack /> Back To Main Page
         </a>
-        {/* <div className='self-center bg-gray-300 flex gap-5 font-bold rounded-full p-1 flex-col md:flex-row justify-center items-center '>
-          <p className='bg-gray-200 rounded-full p-2 text-gray-600 hover:border-black cursor-pointer border hover:text-black'>{formatDate(startDate)}</p>
-          <p className='p-2'>To</p>
-          <p className='bg-gray-200 rounded-full p-2 text-gray-600 hover:border-black cursor-pointer border hover:text-black'>{formatDate(endDate)}</p>
-          <div className=' bg-gray-200 p-2 rounded-full text-gray-600 hover:border-black cursor-pointer border hover:text-black'>
-            <Close />
-          </div>
-        </div> */}
       </div>
       <div className="w-full overflow-x-auto flex flex-wrap">
         {roomsData.map((item) => {
@@ -194,6 +240,8 @@ const Reservation = () => {
           const firstImageUrl = imageUrls && imageUrls.length > 0 ? imageUrls[0] : '';
           const totalPrice = selectedNumberOfDays * item.price;
           const price = item.price
+
+
 
           return (
             <div key={item.room_id} className="lg:w-1/4 md:w-1/2 w-full p-4">
@@ -287,8 +335,10 @@ const Reservation = () => {
         })}
       </div>
 
+      <ReservationConfirmationModal />
       {galleryOpen && renderGallery()}
-    </div >
+    </div>
+
   );
 };
 export default Reservation;
