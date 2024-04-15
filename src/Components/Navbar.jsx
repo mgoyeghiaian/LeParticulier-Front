@@ -43,7 +43,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between">
         <div className="hidden items-center gap-10 text-[12px] lg:flex">
           <a href="tel:+9613785866" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-slate-50 border-b-2'>T: +961 3 785866</a>
-          <a href="mailto:info@leparticulier.com" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-slate-50 border-b-2'> INFO@LEPARTICULER.COM</a>
+          <a href="mailto:info@particulierlb.com" className='hover:no-underline cursor-pointer hover:text-gray-500  hover:border-gray-700  border-slate-50 border-b-2'> INFO@PARTICULIERLB.COM </a>
         </div>
 
         <RouterLink to="/" onClick={closeMobileMenu}>
@@ -134,8 +134,8 @@ const Navbar = () => {
             <div className=" gap-2 text-[14px] text-gray-200  flex flex-col justify-center mt-6">
               <a href="tel:+9615123456" className=' text-center' onClick={closeMobileMenu}
               >T |<span className='hover:text-gray-500'> +961 (512) 3456</span></a>
-              <a href="mailto:info@leparticulier.com" onClick={closeMobileMenu}
-              ><span className='hover:text-gray-500 '>INFO@LEPARTICULER.COM</span> </a>
+              <a href="mailto:info@particulierlb.com" onClick={closeMobileMenu}
+              ><span className='hover:text-gray-500 '>INFO@PARTICULIERLB.COM</span> </a>
             </div>
           </div>
 

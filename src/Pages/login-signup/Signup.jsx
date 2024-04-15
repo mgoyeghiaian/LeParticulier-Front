@@ -30,7 +30,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post(`  http://localhost:8081/register`, {
+      const response = await axios.post(`https://leparticulier-backend.onrender.com/register`, {
         email,
         password,
         firstname,

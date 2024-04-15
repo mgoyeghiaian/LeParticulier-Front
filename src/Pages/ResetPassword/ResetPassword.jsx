@@ -20,7 +20,7 @@ const ResetPassword = () => {
 
   const [user, setUser] = useState('');
   useEffect(() => {
-    axios.get(`  http://localhost:8081/user/${token}`)
+    axios.get(`https://leparticulier-backend.onrender.com/user/${token}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -44,7 +44,7 @@ const ResetPassword = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post(`  http://localhost:8081/reset-password/${user.id}`, {
+      const response = await axios.post(`https://leparticulier-backend.onrender.com/reset-password/${user.id}`, {
         newPassword,
       });
 

@@ -24,7 +24,7 @@ const Footer = () => {
         <div className="flex gap-3 items-center text-[13px] flex-col md:flex-row">
           <a href="tel:+9613785866"><span className='hover:text-gray-500 cursor-pointer'> +961 3 785866</span></a><span className=" hidden md:inline">|</span>
           <a href="tel:+96178845805"><span className='hover:text-gray-500 cursor-pointer'> +961 78 845805</span></a><span className=" hidden md:inline">|</span>
-          <a href="mailto:info@leparticulier.com"><span className='hover:text-gray-500 cursor-pointer '>INFO@LEPARTICULER.COM</span> </a>
+          <a href="mailto:info@particulierlb.com"><span className='hover:text-gray-500 cursor-pointer '>INFO@PARTICULIERLB.COM</span> </a>
         </div>
 
         <div className="flex gap-2 mt-4">

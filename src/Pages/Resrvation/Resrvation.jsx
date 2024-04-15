@@ -47,7 +47,7 @@ const Reservation = () => {
     }));
 
     try {
-      const response = await axios.post(`  http://localhost:8081/reserve-room`, {
+      const response = await axios.post(`https://leparticulier-backend.onrender.com/reserve-room`, {
         user_id: userId,
         room_id: roomId,
         start_date: startDate,
@@ -121,7 +121,7 @@ const Reservation = () => {
     const fetchAmenities = async (roomId) => {
       try {
         setLoader(true)
-        const response = await fetch(`  http://localhost:8081/amenities/${roomId}`);
+        const response = await fetch(`https://leparticulier-backend.onrender.com/amenities/${roomId}`);
         if (!response.ok) {
           throw new Error(`Failed to fetch amenities for room ${roomId}`);
         }

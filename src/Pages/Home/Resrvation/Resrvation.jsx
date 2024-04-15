@@ -37,7 +37,7 @@ const Reservation = () => {
     const fetchRooms = async () => {
       try {
         setShowRoomsLoading(true)
-        const response = await axios.get('  http://localhost:8081/rooms');
+        const response = await axios.get('https://leparticulier-backend.onrender.com/rooms');
         setRooms(response.data);
       } catch (error) {
         console.error('Error fetching rooms:', error);
@@ -78,7 +78,7 @@ const Reservation = () => {
         setLoading(true);
         setShowRoomsLoading(true);
 
-        const response = await axios.post('  http://localhost:8081/available-rooms', {
+        const response = await axios.post('https://leparticulier-backend.onrender.com/available-rooms', {
           start_date: formattedStartDate,
           end_date: formattedEndDate,
         });

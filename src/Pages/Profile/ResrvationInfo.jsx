@@ -21,7 +21,7 @@ const ReservationInfo = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`  http://localhost:8081/userReservations/${userId}`)
+      .get(`https://leparticulier-backend.onrender.com/userReservations/${userId}`)
       .then((response) => {
         setReservations(response.data);
         setIsLoading(false);
@@ -46,7 +46,7 @@ const ReservationInfo = () => {
     setCancelLoading(true);
 
     await axios
-      .put(`  http://localhost:8081/cancelReservation/${reservationToCancel}`)
+      .put(`https://leparticulier-backend.onrender.com/cancelReservation/${reservationToCancel}`)
       .then((response) => {
         setReservations((prevReservations) =>
           prevReservations.map((reservation) => {
